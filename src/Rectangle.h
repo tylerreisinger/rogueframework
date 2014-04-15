@@ -16,7 +16,7 @@ template <typename T>
 class Rectangle
 {
 public:
-	inline Rectangle() : m_left(0), m_bottom(0), m_right(0), m_top(0) {};
+	inline Rectangle() : m_left(0), m_bottom(0), m_right(0), m_top(0) {}
 
 	/**
 	 * @brief Construct a new Rectangle object.
