@@ -5,6 +5,9 @@
 
 #include <SDL2/SDL.h>
 
+namespace rf
+{
+
 class SdlWindow;
 
 class SdlGlContext : public GlContext
@@ -39,5 +42,7 @@ protected:
 
 	SDL_GLContext m_context;
 };
+
+}
 
 #endif

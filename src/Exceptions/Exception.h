@@ -4,6 +4,9 @@
 #include <exception>
 #include <string>
 
+namespace rf
+{
+
 class Exception: public std::exception
 {
 public:
@@ -26,4 +29,5 @@ private:
 	std::string m_message;
 };
 
+}
 #endif

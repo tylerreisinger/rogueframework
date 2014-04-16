@@ -3,6 +3,9 @@
 
 #include <chrono>
 
+namespace rf
+{
+
 class FramePerformanceCounter
 {
 public:
@@ -29,5 +32,7 @@ protected:
 
 	double m_frameRate = 0;
 };
+
+}
 
 #endif

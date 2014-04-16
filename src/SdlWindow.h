@@ -6,6 +6,9 @@
 #include "Flags.h"
 #include "Vector2.h"
 
+namespace rf
+{
+
 
 /**
  * @brief Represents a single window managed by the system.
@@ -71,5 +74,7 @@ public:
 protected:
 	SDL_Window* m_window = nullptr;
 };
+
+}
 
 #endif

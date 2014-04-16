@@ -1,5 +1,8 @@
 #include "Exception.h"
 
+namespace rf
+{
+
 Exception::Exception()
 {
 }
@@ -29,4 +32,6 @@ Exception& Exception::operator =(Exception&& other) noexcept
 {
 	m_message = std::move(other.m_message);
 	return *this;
+}
+
 }

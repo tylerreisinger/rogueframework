@@ -1,6 +1,9 @@
 #ifndef GLCONTEXT_H_
 #define GLCONTEXT_H_
 
+namespace rf
+{
+
 class GlContext
 {
 public:
@@ -9,5 +12,7 @@ public:
 	virtual ~GlContext();
 
 };
+
+}
 
 #endif

@@ -5,6 +5,9 @@
 
 #include <SDL2/SDL.h>
 
+namespace rf
+{
+
 class Game
 {
 public:
@@ -40,5 +43,7 @@ private:
 
 	double m_targetFrameRate = 0.0;
 };
+
+}
 
 #endif

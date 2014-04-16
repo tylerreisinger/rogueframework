@@ -5,6 +5,9 @@
 
 #include <cassert>
 
+namespace rf
+{
+
 template <typename T>
 class Vector3
 {
@@ -160,6 +163,8 @@ Vector3<T> Vector3<T>::fromMagnitudeAndAngles(T magnitude, double yaw,
 	using std::cos;
 	using std::sin;
 	return Vector3(cos(yaw) * cos(pitch), sin(yaw) * cos(pitch), sin(pitch));
+}
+
 }
 
 #endif

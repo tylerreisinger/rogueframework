@@ -2,6 +2,9 @@
 
 #include "SdlWindow.h"
 
+namespace rf
+{
+
 SdlGlContext::SdlGlContext(const SdlWindow& window, const ContextSettings& settings)
 {
 	applyContextSettings(settings);
@@ -36,4 +39,6 @@ void SdlGlContext::applyContextSettings(const ContextSettings& settings)
 	{
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, settings.stencilBufferSize);
 	}
+}
+
 }

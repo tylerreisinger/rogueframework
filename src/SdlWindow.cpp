@@ -2,6 +2,9 @@
 
 #include "Exceptions/SdlException.h"
 
+namespace rf
+{
+
 SdlWindow::SdlWindow(const std::string& title, int width, int height,
 		const Flags<WindowFlags>& flags)
 {
@@ -73,4 +76,5 @@ void SdlWindow::display() const
 	SDL_GL_SwapWindow(m_window);
 }
 
+}
 

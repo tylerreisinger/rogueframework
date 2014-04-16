@@ -1,5 +1,8 @@
 #include "FramePerformanceCounter.h"
 
+namespace rf
+{
+
 FramePerformanceCounter::FramePerformanceCounter()
 {
 
@@ -21,4 +24,6 @@ void FramePerformanceCounter::frameStart()
 void FramePerformanceCounter::frameLogicEnd()
 {
 	m_frameCount += 1;
+}
+
 }

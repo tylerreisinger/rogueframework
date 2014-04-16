@@ -5,9 +5,11 @@
 #include <initializer_list>
 #include <boost/iterator/iterator_facade.hpp>
 
+namespace rf
+{
+
 template <typename T>
 class FlagsIterator;
-
 
 /**
  * @brief Provides a safe way to store a bitwise or of enum values.
@@ -219,6 +221,8 @@ inline T FlagsIterator<T>::dereference() const
 	{
 		return static_cast<T>(1 << m_curBit);
 	}
+}
+
 }
 
 #endif

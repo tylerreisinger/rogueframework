@@ -3,6 +3,9 @@
 
 #include "Exception.h"
 
+namespace rf
+{
+
 class SdlException: public Exception
 {
 public:
@@ -10,4 +13,5 @@ public:
 	~SdlException() noexcept = default;
 };
 
+}
 #endif

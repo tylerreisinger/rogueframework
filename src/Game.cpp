@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+namespace rf
+{
+
 Game::Game()
 {
 
@@ -40,4 +43,6 @@ void Game::setTargetFrameRate(double target)
 	assert(target >= 0.0);
 
 	m_targetFrameRate = target;
+}
+
 }

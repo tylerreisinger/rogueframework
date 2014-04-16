@@ -12,6 +12,9 @@
 
 #include <algorithm>
 
+namespace rf
+{
+
 template <typename T>
 class Rectangle
 {
@@ -452,6 +455,8 @@ inline Rectangle<T> Rectangle<T>::boundingRectangle(const std::vector<Rectangle<
 		outRect = boundingRectangle(outRect, rectangles[i]);
 	}
 	return outRect;
+}
+
 }
 
 #endif /* RECTANGLE_H_ */

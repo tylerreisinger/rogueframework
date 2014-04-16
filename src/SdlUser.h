@@ -5,6 +5,9 @@
 
 #include "Flags.h"
 
+namespace rf
+{
+
 ///@brief Base class for SDL2 applications.
 ///@details Initializes SDL on creation and frees
 ///resources on deletion.
@@ -23,5 +26,7 @@ public:
 	SdlUser& operator =(SdlUser&&) = delete;
 
 };
+
+}
 
 #endif

@@ -3,6 +3,9 @@
 
 #include <cmath>
 
+namespace rf
+{
+
 template <typename T>
 class Vector2
 {
@@ -155,5 +158,7 @@ inline Vector2<T> Vector2<T>::fromMagnitudeAndAngle(T magnitude, T angle)
 	using std::cos;
 
 	return Vector2<T>(magnitude * cos(angle), magnitude * sin(angle));
+}
+
 }
 #endif /* VECTOR2_H_ */
