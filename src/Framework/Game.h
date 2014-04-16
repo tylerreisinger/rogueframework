@@ -30,6 +30,8 @@ public:
 
 	double getTargetFrameRate() const {return m_targetFrameRate;}
 
+	void stop();
+
 protected:
 
 	virtual void draw() = 0;

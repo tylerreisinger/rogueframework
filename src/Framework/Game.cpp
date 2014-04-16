@@ -45,4 +45,11 @@ void Game::setTargetFrameRate(double target)
 	m_targetFrameRate = target;
 }
 
+void Game::stop()
+{
+	m_isRunning = false;
 }
+
+}
+
+
