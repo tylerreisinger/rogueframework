@@ -23,6 +23,12 @@ SdlWindow::SdlWindow(const std::string& title, int width, int height,
 	}
 }
 
+SdlWindow::SdlWindow(SdlWindow&& other):
+	m_window(other.m_window)
+{
+	other.m_window = nullptr;
+}
+
 SdlWindow::~SdlWindow()
 {
 	if(m_window != nullptr)
@@ -31,22 +37,40 @@ SdlWindow::~SdlWindow()
 	}
 }
 
+SdlWindow& SdlWindow::operator =(SdlWindow&& other)
+{
+	if(&other != this)
+	{
+		if(m_window)
+		{
+			SDL_DestroyWindow(m_window);
+		}
+		m_window = other.m_window;
+		other.m_window = nullptr;
+	}
+	return *this;
+}
+
+
+
 void SdlWindow::setTitle(const std::string& title)
 {
 	SDL_SetWindowTitle(m_window, title.c_str());
 }
 
-void SdlWindow::resizeWindow(int width, int height)
+void SdlWindow::resize(int width, int height)
 {
 	SDL_SetWindowSize(m_window, width, height);
 }
 
-void SdlWindow::size(int& width, int& height) const
+Vector2i SdlWindow::size() const
 {
-	SDL_GetWindowSize(m_window, &width, &height);
+	Vector2i size;
+	SDL_GetWindowSize(m_window, &size.x, &size.y);
+	return size;
 }
 
-void SdlWindow::setPosition(const Vector2i& position)
+void SdlWindow::move(const Vector2i& position)
 {
 	SDL_SetWindowPosition(m_window, position.x, position.y);
 }

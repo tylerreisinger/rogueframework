@@ -1,6 +1,8 @@
 #ifndef SDL_WINDOW_H_
 #define SDL_WINDOW_H_
 
+#include "Framework/Window.h"
+
 #include <vector>
 #include <memory>
 
@@ -16,7 +18,7 @@ class Event;
 /**
  * @brief Represents a single window managed by SDL
  */
-class SdlWindow
+class SdlWindow : public Window
 {
 public:
 
@@ -35,46 +37,38 @@ public:
 
 	virtual ~SdlWindow();
 
-	///Disallow copying
-	SdlWindow(const SdlWindow&) = delete;
-	///Disallow moving
-	SdlWindow(SdlWindow&&) = delete;
-	///Disallow copying
-	SdlWindow& operator =(const SdlWindow&) = delete;
-	///Disallow moving
-	SdlWindow& operator =(SdlWindow&&) = delete;
+	SdlWindow(SdlWindow&& other);
+	SdlWindow& operator =(SdlWindow&& other);
 
 	///Set the title of the window
-	void setTitle(const std::string& title);
+	virtual void setTitle(const std::string& title) override;
 
 	///Resize the window's client area
-	void resizeWindow(int width, int height);
+	virtual void resize(int width, int height) override;
 
-	/**
-	 * Return the window's client area size.
-	 * @param width Out. The current width of the window, in pixels.
-	 * @param height Out. The current height of the window, in pixels.
-	 */
-	void size(int& width, int& height)const;
+	///Return the window client area size
+	virtual Vector2i size() const override;
 
-	///Set the position of the window, in screen coordinates.
-	void setPosition(const Vector2i& position);
+	///Move the window to @a position.
+	virtual void move(const Vector2i& position) override;
 
 	///Return the position of the window, in screen coordinates.
-	Vector2i position() const;
+	virtual Vector2i position() const override;
 
-	int width() const;
-	int height() const;
+	///Return the width of the window
+	virtual int width() const override;
+	///Return the height of the window
+	virtual int height() const override;
 
 	///Display rendered content.
 	void display() const;
 
 	///Return a vector of all pending events in the SDL event queue.
-	std::vector<std::unique_ptr<Event>> getEvents();
+	virtual std::vector<std::unique_ptr<Event>> getEvents() override;
 
 	///Return a single pending event from the SDL event queue
 	///@details Return nullptr if no events are pending
-	std::unique_ptr<Event> getNextEvent();
+	virtual std::unique_ptr<Event> getNextEvent() override;
 
 	///Return the raw handle to the sdl window
 	SDL_Window* getHandle() const {return m_window;}
