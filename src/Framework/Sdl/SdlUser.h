@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "Flags.h"
+#include "Framework/Flags.h"
 
 namespace rf
 {

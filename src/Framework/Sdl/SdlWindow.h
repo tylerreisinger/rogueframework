@@ -1,10 +1,10 @@
-#ifndef WINDOW_H_
-#define WINDOW_H_
+#ifndef SDL_WINDOW_H_
+#define SDL_WINDOW_H_
 
 #include <SDL2/SDL.h>
 
-#include "Flags.h"
-#include "Vector2.h"
+#include "Framework/Flags.h"
+#include "Framework/Vector2.h"
 
 namespace rf
 {

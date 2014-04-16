@@ -1,7 +1,7 @@
 #ifndef SDLGLCONTEXT_H_
 #define SDLGLCONTEXT_H_
 
-#include "GlContext.h"
+#include "Framework/GlContext.h"
 
 #include <SDL2/SDL.h>
 
