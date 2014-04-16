@@ -1,6 +1,9 @@
 #ifndef SDL_WINDOW_H_
 #define SDL_WINDOW_H_
 
+#include <vector>
+#include <memory>
+
 #include <SDL2/SDL.h>
 
 #include "Framework/Flags.h"
@@ -8,11 +11,10 @@
 
 namespace rf
 {
-
+class Event;
 
 /**
- * @brief Represents a single window managed by the system.
- * @details Windows are currently managed by SDL and thus this class is a wrapper for the SDL window interface.
+ * @brief Represents a single window managed by SDL
  */
 class SdlWindow
 {
@@ -64,14 +66,23 @@ public:
 	int width() const;
 	int height() const;
 
-	//GL Functions
-
 	///Display rendered content.
 	void display() const;
 
+	///Return a vector of all pending events in the SDL event queue.
+	std::vector<std::unique_ptr<Event>> getEvents();
+
+	///Return a single pending event from the SDL event queue
+	///@details Return nullptr if no events are pending
+	std::unique_ptr<Event> getNextEvent();
+
+	///Return the raw handle to the sdl window
 	SDL_Window* getHandle() const {return m_window;}
 
 protected:
+
+	std::unique_ptr<Event> translateEvent(const SDL_Event& event);
+
 	SDL_Window* m_window = nullptr;
 };
 

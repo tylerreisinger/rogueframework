@@ -2,6 +2,10 @@
 
 #include "Framework/Exceptions/SdlException.h"
 
+#include "Framework/Events/Event.h"
+
+#include "make_unique.h"
+
 namespace rf
 {
 
@@ -76,5 +80,48 @@ void SdlWindow::display() const
 	SDL_GL_SwapWindow(m_window);
 }
 
+std::vector<std::unique_ptr<Event>> SdlWindow::getEvents()
+{
+	std::vector<std::unique_ptr<Event>> events;
+
+	SDL_Event sdlEvent;
+	while(SDL_PollEvent(&sdlEvent))
+	{
+		auto newEvent = translateEvent(sdlEvent);
+		if(newEvent)
+		{
+			events.push_back(std::move(newEvent));
+		}
+	}
+
+	return std::move(events);
 }
 
+
+std::unique_ptr<Event> SdlWindow::getNextEvent()
+{
+	SDL_Event sdlEvent;
+	if(SDL_PollEvent(&sdlEvent))
+	{
+		return translateEvent(sdlEvent);
+	}
+	return nullptr;
+}
+
+
+std::unique_ptr<Event> SdlWindow::translateEvent(const SDL_Event& event)
+{
+	std::unique_ptr<Event> newEvent;
+	switch(event.type)
+	{
+	case SDL_QUIT:
+	{
+		newEvent = make_unique<Event>(Event::Type::Quit);
+		break;
+	}
+	}
+
+	return newEvent;
+}
+
+}

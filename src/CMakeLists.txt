@@ -3,6 +3,14 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlWindow.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlWindow.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Events/Event.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Events/Event.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Flags.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.cpp
@@ -11,12 +19,6 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Rectangle.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlWindow.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlWindow.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector3.h
 	PARENT_SCOPE)
