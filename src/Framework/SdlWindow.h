@@ -29,7 +29,7 @@ public:
 	 * @param flags Combination of WindowFlags to modify the window behavior.
 	 * @throw SDLException The window could not be created.
 	 */
-	SdlWindow(const std::string& title, int width, int height, const Flags<WindowFlags>& flags);
+	SdlWindow(const std::string& title, int width, int height, const Flags<WindowFlags>& flags = {});
 
 	virtual ~SdlWindow();
 
