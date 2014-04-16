@@ -1,4 +1,4 @@
-SET(SOURCES
+SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.h
