@@ -1,6 +1,10 @@
 SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
@@ -19,6 +23,10 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Rectangle.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector3.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Window.h
