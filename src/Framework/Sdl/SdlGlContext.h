@@ -1,7 +1,7 @@
 #ifndef SDLGLCONTEXT_H_
 #define SDLGLCONTEXT_H_
 
-#include "Framework/GlContext.h"
+#include "Framework/Gl/Context.h"
 
 #include <SDL2/SDL.h>
 
@@ -10,7 +10,7 @@ namespace rf
 
 class SdlWindow;
 
-class SdlGlContext : public GlContext
+class SdlGlContext : public gl::Context
 {
 	struct ContextSettings
 	{

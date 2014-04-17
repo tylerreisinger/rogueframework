@@ -7,6 +7,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.h
@@ -20,8 +22,6 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Rectangle.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp

@@ -3,16 +3,19 @@
 
 namespace rf
 {
+namespace gl
+{
 
-class GlContext
+class Context
 {
 public:
 
-	GlContext();
-	virtual ~GlContext();
+	Context();
+	virtual ~Context();
 
 };
 
+}
 }
 
 #endif
