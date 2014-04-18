@@ -1,4 +1,6 @@
 SET(FRAMEWORK_SOURCES
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/EnumerationValueException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/EnumerationValueException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.h
@@ -9,6 +11,12 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.h

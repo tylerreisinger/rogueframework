@@ -1,5 +1,7 @@
 #include "Framework/Gl/GlObject.h"
 
+#include <utility>
+
 namespace rf
 {
 namespace gl
@@ -9,11 +11,6 @@ GlObject::GlObject(GlObject&& other) noexcept:
 	m_handle(other.m_handle), m_context(other.m_context)
 {
 	other.m_handle = 0;
-}
-
-GlObject::~GlObject()
-{
-	destroy();
 }
 
 GlObject& GlObject::operator =(GlObject&& other) noexcept

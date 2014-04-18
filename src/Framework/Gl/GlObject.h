@@ -13,7 +13,7 @@ class GlObject
 {
 public:
 
-	virtual ~GlObject();
+	virtual ~GlObject() = default;
 
 	GlObject(const GlObject&) = delete;
 	GlObject& operator =(const GlObject&) = delete;
@@ -21,7 +21,7 @@ public:
 	GlObject(GlObject&& other) noexcept;
 	GlObject& operator =(GlObject&& other) noexcept;
 
-	GLuint handle() {return m_handle;}
+	GLuint handle() const {return m_handle;}
 
 	static void swap(GlObject& obj1, GlObject& obj2);
 
