@@ -13,6 +13,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
@@ -33,6 +35,7 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlHeaders.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix3.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix4.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Rectangle.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp
