@@ -15,6 +15,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/ShaderProgram.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/ShaderProgram.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
