@@ -128,6 +128,9 @@ public:
 
 	Texture();
 	virtual ~Texture();
+
+	Texture(Texture&& other) = default;
+	Texture& operator =(Texture&& other) = default;
 };
 
 }

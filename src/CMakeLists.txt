@@ -30,6 +30,9 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlHeaders.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix2.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix3.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Rectangle.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp
@@ -37,5 +40,6 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector3.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector4.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Window.h
 	PARENT_SCOPE)

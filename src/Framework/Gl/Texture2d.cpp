@@ -24,6 +24,19 @@ Texture2d::Texture2d(int width, int height, int mipmapLevels, Context* context):
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 }
 
+Texture2d::Texture2d(Texture2d&& other) noexcept : Texture(std::move(other)),
+	m_height(other.m_height), m_width(other.m_width)
+{
+}
+
+Texture2d& Texture2d::operator =(Texture2d&& other) noexcept
+{
+	Texture::operator =(std::move(other));
+	m_height = other.m_height;
+	m_width = other.m_width;
+	return *this;
+}
+
 Texture2d::~Texture2d()
 {
 	glDeleteTextures(1, &m_handle);

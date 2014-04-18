@@ -75,7 +75,7 @@ typedef Vector3<int> Vector3i;
 typedef Vector3<unsigned int> Vector3ui;
 
 template<typename T>
-inline Vector3<T>::Vector3(T xVal, T yVal, T zVal):
+inline constexpr Vector3<T>::Vector3(T xVal, T yVal, T zVal):
 	x(xVal), y(yVal), z(zVal)
 {
 }

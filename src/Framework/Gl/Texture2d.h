@@ -16,6 +16,9 @@ public:
 	Texture2d(int width, int height, int mipmapLevels, Context* context);
 	virtual ~Texture2d();
 
+	Texture2d(Texture2d&& other) noexcept;
+	Texture2d& operator =(Texture2d&& other) noexcept;
+
 	/**
 	 * @brief Replace part or all of the pixel data in the texture with new data.
 	 * @details The buffer is not reallocated, so @a updateRegion must be entirely
