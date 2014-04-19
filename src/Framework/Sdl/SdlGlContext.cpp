@@ -2,6 +2,8 @@
 
 #include "SdlWindow.h"
 
+#include "Framework/Exceptions/SdlException.h"
+
 namespace rf
 {
 
@@ -9,6 +11,10 @@ SdlGlContext::SdlGlContext(const SdlWindow& window, const ContextSettings& setti
 {
 	applyContextSettings(settings);
 	m_context = SDL_GL_CreateContext(window.getHandle());
+	if(!m_context)
+	{
+		throw SdlException("Failed to create OpenGL context");
+	}
 }
 
 SdlGlContext::~SdlGlContext()
@@ -41,4 +47,11 @@ void SdlGlContext::applyContextSettings(const ContextSettings& settings)
 	}
 }
 
+void SdlGlContext::makeCurrent(const SdlWindow& window)
+{
+	SDL_GL_MakeCurrent(window.getHandle(), m_context);
 }
+
+}
+
+

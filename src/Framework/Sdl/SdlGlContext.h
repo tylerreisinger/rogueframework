@@ -38,6 +38,8 @@ public:
 
 	void setVerticalSync(bool enabled);
 
+	void display();
+
 protected:
 
 	void applyContextSettings(const ContextSettings& settings);

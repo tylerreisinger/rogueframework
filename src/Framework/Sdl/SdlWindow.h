@@ -61,7 +61,7 @@ public:
 	virtual int height() const override;
 
 	///Display rendered content.
-	void display() const;
+	virtual void display() const;
 
 	///Return a vector of all pending events in the SDL event queue.
 	virtual std::vector<std::unique_ptr<Event>> getEvents() override;

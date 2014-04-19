@@ -46,6 +46,8 @@ public:
 	///@details Return nullptr if no events are pending
 	virtual std::unique_ptr<Event> getNextEvent() = 0;
 
+	virtual void display() const = 0;
+
 protected:
 
 };

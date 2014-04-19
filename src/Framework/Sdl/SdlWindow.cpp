@@ -15,7 +15,7 @@ SdlWindow::SdlWindow(const std::string& title, int width, int height,
 	Flags<WindowFlags> flagsCopy;
 	flagsCopy.setFlag(WindowFlags::OpenGL);
 	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			width, height, flags.getRawValue());
+			width, height, flagsCopy.getRawValue());
 
 	if(m_window == nullptr)
 	{
