@@ -4,6 +4,8 @@
 #include "make_unique.h"
 #include "FontManager.h"
 
+#include "BitmapGlyph.h"
+
 namespace rf
 {
 
@@ -169,7 +171,7 @@ std::shared_ptr<Glyph> FontFace::constructGlyphObject(FT_Glyph glyph) const
 {
 	if(glyph->format == FT_GLYPH_FORMAT_BITMAP)
 	{
-		return std::make_shared<BitmapGlyph>(glyph);
+		return std::make_shared<BitmapGlyph>(reinterpret_cast<FT_BitmapGlyph>(glyph));
 	}
 	else
 	{
