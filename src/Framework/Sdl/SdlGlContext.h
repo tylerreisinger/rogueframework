@@ -12,6 +12,8 @@ class SdlWindow;
 
 class SdlGlContext : public gl::Context
 {
+public:
+
 	struct ContextSettings
 	{
 		bool doubleBuffered = false;
@@ -22,7 +24,7 @@ class SdlGlContext : public gl::Context
 		int glMinorVersion = 1;
 	};
 
-public:
+
 	SdlGlContext(const SdlWindow& window, const ContextSettings& settings);
 	virtual ~SdlGlContext();
 

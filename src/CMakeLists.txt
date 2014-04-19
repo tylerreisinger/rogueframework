@@ -35,6 +35,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Events/Event.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/BitmapGlyph.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/BitmapGlyph.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Color.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Color.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Flags.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontFace.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontFace.cpp
