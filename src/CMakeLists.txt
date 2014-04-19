@@ -3,6 +3,10 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/EnumerationValueException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/Exception.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FileIoException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FileIoException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FreeTypeException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FreeTypeException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.h
@@ -29,12 +33,20 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlWindow.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Events/Event.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Events/Event.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/BitmapGlyph.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/BitmapGlyph.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Flags.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontFace.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontFace.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontManager.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FontManager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/FramePerformanceCounter.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Game.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/GlHeaders.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Glyph.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Glyph.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix3.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Matrix4.h
