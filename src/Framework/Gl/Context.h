@@ -6,19 +6,15 @@
 #include "Texture2d.h"
 #include "Framework/Flags.h"
 
+#include "Enums.h"
+
 namespace rf
 {
 class Color;
+
 namespace gl
 {
-
-enum class ClearFlags : GLbitfield
-{
-	ColorBuffer = GL_COLOR_BUFFER_BIT,
-	DepthBuffer = GL_DEPTH_BUFFER_BIT,
-	StencilBuffer = GL_STENCIL_BUFFER_BIT
-};
-
+class BufferObject;
 class Context
 {
 public:
@@ -33,6 +29,8 @@ public:
 	virtual ~Context();
 
 	void bindTexture(const Texture2d& texture);
+
+	void bindBuffer(BufferBindTarget target, const BufferObject& buffer);
 
 	void clear(const Flags<ClearFlags>& flags);
 	void setClearColor(const Color& color);
@@ -54,6 +52,8 @@ inline void Context::bindTexture(const Texture2d& texture)
 		m_boundTexture2d = &texture;
 	}
 }
+
+
 
 }
 }

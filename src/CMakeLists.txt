@@ -15,6 +15,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/SdlException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/BufferObject.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/BufferObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.h
