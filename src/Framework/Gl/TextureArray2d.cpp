@@ -62,6 +62,23 @@ TextureArray2d::~TextureArray2d()
 	destroy();
 }
 
+TextureArray2d::TextureArray2d(TextureArray2d&& other) noexcept : Texture(std::move(other)),
+	m_height(other.m_height), m_width(other.m_width), m_layers(other.m_layers)
+{
+}
+
+TextureArray2d& TextureArray2d::operator =(TextureArray2d&& other) noexcept
+{
+	if(&other != this)
+	{
+		Texture::operator =(std::move(other));
+		m_height = other.m_height;
+		m_width = other.m_width;
+		m_layers = other.m_layers;
+	}
+	return *this;
+}
+
 void TextureArray2d::setClampModes(ClampMode clampS, ClampMode clampT)
 {
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLenum>(clampS));

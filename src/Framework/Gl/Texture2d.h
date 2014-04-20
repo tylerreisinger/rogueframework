@@ -33,7 +33,7 @@ public:
 	 * 1, 2, 4 or 8.
 	 */
 	void updateData(const Rectanglei& updateRegion, DataPixelFormat dataFormat,
-			PixelType sourcePixelType, const void* data, int pixelAlignment = 4);
+			PixelType sourcePixelType, const void* data);
 
 	void setClampModes(ClampMode clampS, ClampMode clampT);
 
@@ -56,6 +56,7 @@ public:
 
 protected:
 	virtual void destroy() override;
+	void initializeParams();
 
 	int m_width;
 	int m_height;

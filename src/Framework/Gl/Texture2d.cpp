@@ -19,16 +19,9 @@ Texture2d::Texture2d(int width, int height, int mipmapLevels,
 	CHECK_GL_ERROR(glGenTextures);
 	context->bindTexture(*this);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipmapLevels);
-	CHECK_GL_ERROR(glTexParameteri);
+	initializeParams();
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipmapLevels);
 	CHECK_GL_ERROR(glTexParameteri);
 
 #if GL_TARGET_VERSION >= 402
@@ -62,9 +55,12 @@ Texture2d::Texture2d(Texture2d&& other) noexcept : Texture(std::move(other)),
 
 Texture2d& Texture2d::operator =(Texture2d&& other) noexcept
 {
-	Texture::operator =(std::move(other));
-	m_height = other.m_height;
-	m_width = other.m_width;
+	if(&other != this)
+	{
+		Texture::operator =(std::move(other));
+		m_height = other.m_height;
+		m_width = other.m_width;
+	}
 	return *this;
 }
 
@@ -98,8 +94,7 @@ void Texture2d::setFilterModes(FilterMode magnificationFilter,
 }
 
 void Texture2d::updateData(const Rectanglei& updateRegion,
-		DataPixelFormat dataFormat, PixelType sourcePixelType, const void* data,
-		int pixelAlignment)
+		DataPixelFormat dataFormat, PixelType sourcePixelType, const void* data)
 {
 	glTexSubImage2D(GL_TEXTURE_2D, 0, updateRegion.left(), updateRegion.bottom(),
 			updateRegion.width(), updateRegion.height(), static_cast<GLenum>(dataFormat),
@@ -119,6 +114,18 @@ void Texture2d::destroy()
 	{
 		glDeleteTextures(1, &m_handle);
 	}
+}
+
+void Texture2d::initializeParams()
+{
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	CHECK_GL_ERROR(glTexParameteri);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	CHECK_GL_ERROR(glTexParameteri);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	CHECK_GL_ERROR(glTexParameteri);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	CHECK_GL_ERROR(glTexParameteri);
 }
 
 }
