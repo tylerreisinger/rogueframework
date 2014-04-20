@@ -34,10 +34,6 @@ BufferObject& BufferObject::operator =(BufferObject&& other) noexcept
 {
 	if(&other != this)
 	{
-		if(m_handle != 0)
-		{
-			glDeleteBuffers(1, &m_handle);
-		}
 		GlObject::operator =(std::move(other));
 		m_usage = other.m_usage;
 		m_size = other.m_size;
@@ -122,6 +118,14 @@ void* BufferObject::mapRaw(intptr_t startOffset, size_t count,
 				static_cast<GLbitfield>(access.getRawValue()));
 	CHECK_GL_ERROR(glMapBufferRange);
 	return ret;
+}
+
+void BufferObject::destroy()
+{
+	if(m_handle != 0)
+	{
+		glDeleteBuffers(1, &m_handle);
+	}
 }
 
 }

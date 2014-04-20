@@ -17,10 +17,7 @@ GlObject& GlObject::operator =(GlObject&& other) noexcept
 {
 	if(&other != this)
 	{
-		if(m_handle)
-		{
-			destroy();
-		}
+		destroy();
 		m_handle = other.m_handle;
 		m_context = other.m_context;
 		other.m_handle = 0;

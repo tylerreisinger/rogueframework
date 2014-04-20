@@ -29,6 +29,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlUser.h

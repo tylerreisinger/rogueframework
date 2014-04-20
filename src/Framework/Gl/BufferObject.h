@@ -132,6 +132,7 @@ public:
 
 	virtual BufferBindTarget getTarget() const = 0;
 
+	virtual void destroy() override;
 
 protected:
 	BufferObject() {};

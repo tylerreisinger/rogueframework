@@ -45,8 +45,7 @@ Texture2d& Texture2d::operator =(Texture2d&& other) noexcept
 
 Texture2d::~Texture2d()
 {
-	glDeleteTextures(1, &m_handle);
-	CHECK_GL_ERROR(glDeleteTextures);
+	destroy();
 }
 
 void Texture2d::setClampModes(ClampMode clampS, ClampMode clampT)
@@ -101,8 +100,10 @@ void Texture2d::generateMipmap()
 
 void Texture2d::destroy()
 {
-	glDeleteTextures(1, &m_handle);
-	CHECK_GL_ERROR(glDeleteTextures);
+	if(m_handle != 0)
+	{
+		glDeleteTextures(1, &m_handle);
+	}
 }
 
 }
