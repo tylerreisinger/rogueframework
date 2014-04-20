@@ -3,6 +3,7 @@
 #include "Framework/Color.h"
 
 #include "BufferObject.h"
+#include "TextureArray2d.h"
 
 namespace rf
 {
@@ -20,6 +21,11 @@ Context::~Context()
 void Context::clear(const Flags<ClearFlags>& flags)
 {
 	glClear(flags.getRawValue());
+}
+
+void Context::bindTexture(const TextureArray2d& texture)
+{
+	glBindTexture(GL_TEXTURE_2D_ARRAY, texture.handle());
 }
 
 void Context::setClearColor(const Color& color)

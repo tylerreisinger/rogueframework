@@ -17,6 +17,7 @@ namespace gl
 class BufferObject;
 class VertexBufferObject;
 class IndexBufferObject;
+class TextureArray2d;
 
 class Context
 {
@@ -32,6 +33,7 @@ public:
 	virtual ~Context();
 
 	void bindTexture(const Texture2d& texture);
+	void bindTexture(const TextureArray2d& texture);
 
 	void bindBuffer(BufferBindTarget target, const BufferObject& buffer);
 	void bindBuffer(const VertexBufferObject& buffer);

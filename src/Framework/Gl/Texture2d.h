@@ -13,7 +13,8 @@ namespace gl
 class Texture2d: public rf::gl::Texture
 {
 public:
-	Texture2d(int width, int height, int mipmapLevels, Context* context);
+	Texture2d(int width, int height, int mipmapLevels,
+			InternalPixelFormat internalFormat, Context* context);
 	virtual ~Texture2d();
 
 	Texture2d(Texture2d&& other) noexcept;
