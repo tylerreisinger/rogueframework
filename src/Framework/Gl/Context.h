@@ -15,6 +15,9 @@ class Color;
 namespace gl
 {
 class BufferObject;
+class VertexBufferObject;
+class IndexBufferObject;
+
 class Context
 {
 public:
@@ -31,6 +34,8 @@ public:
 	void bindTexture(const Texture2d& texture);
 
 	void bindBuffer(BufferBindTarget target, const BufferObject& buffer);
+	void bindBuffer(const VertexBufferObject& buffer);
+	void bindBuffer(const IndexBufferObject& buffer);
 
 	void clear(const Flags<ClearFlags>& flags);
 	void setClearColor(const Color& color);
@@ -53,7 +58,15 @@ inline void Context::bindTexture(const Texture2d& texture)
 	}
 }
 
+inline void Context::bindBuffer(const VertexBufferObject& buffer)
+{
+	bindBuffer(BufferBindTarget::ArrayBuffer, reinterpret_cast<const BufferObject&>(buffer));
+}
 
+inline void Context::bindBuffer(const IndexBufferObject& buffer)
+{
+	bindBuffer(BufferBindTarget::IndexBuffer, reinterpret_cast<const BufferObject&>(buffer));
+}
 
 }
 }

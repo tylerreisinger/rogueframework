@@ -21,6 +21,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Context.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/GlObject.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/IndexBufferObject.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/IndexBufferObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Shader.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/ShaderProgram.h
@@ -29,6 +31,9 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexArrayObject.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexArrayObject.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Sdl/SdlGlContext.h
