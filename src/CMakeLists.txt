@@ -68,6 +68,10 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector3.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector4.h
