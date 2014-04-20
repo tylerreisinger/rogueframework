@@ -7,6 +7,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FileIoException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FreeTypeException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/FreeTypeException.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/GlException.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/GlException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/NotFoundException.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Exceptions/ObjectExistsException.h
