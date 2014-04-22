@@ -39,10 +39,12 @@ protected:
 		float uy;
 		float uz;
 
-		uint32_t color;
+		uint32_t fgColor;
+		uint32_t bgColor;
 	};
 
 	void initializeStaticBuffers();
+	void fillDynamicAttributeBuffer();
 
 	gl::Context* m_context;
 

@@ -96,8 +96,11 @@ std::unique_ptr<uint32_t[]> TextTileSet::copyGlyphBitmap(std::shared_ptr<const B
 			int yPos = y + tileHeight() - glyph->top() + belowBaseline;
 			int index = xPos + yPos * tileWidth();
 			//Set color to white and alpha to the color in the glyph bitmap.
-			data[index] = (sourceBitmap[x + y * glyph->pitch()] << 24) | (sourceBitmap[x + y * glyph->pitch()] << 16)
-					| (sourceBitmap[x + y * glyph->pitch()] << 8) | (sourceBitmap[x + y * glyph->pitch()] << 0);
+			if(index < bitmapSize)
+			{
+				data[index] = (sourceBitmap[x + y * glyph->pitch()] << 24) | (sourceBitmap[x + y * glyph->pitch()] << 16)
+						| (sourceBitmap[x + y * glyph->pitch()] << 8) | (sourceBitmap[x + y * glyph->pitch()] << 0);
+			}
 		}
 	}
 	return data;

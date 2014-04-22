@@ -24,7 +24,7 @@ public:
 protected:
 	Color m_foregroundColor = Color::white();
 	Color m_backgroundColor = Color::black();
-	int m_tileIndex = 0;
+	int m_tileIndex = ' ';
 };
 
 }

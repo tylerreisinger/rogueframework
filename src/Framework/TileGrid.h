@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <cstring>
+#include <string>
 
 namespace rf
 {
@@ -41,6 +42,12 @@ public:
 
 	void setTile(size_t index, const Tile& tile) {m_tiles[index] = tile;}
 	void setTile(int x, int y, const Tile& tile) {m_tiles[x + m_width * y] = tile;}
+
+	void writeString(int startX, int startY, const char* string);
+	void writeString(int startX, int startY, const std::string& string)
+	{
+		writeString(startX, startY, string.c_str());
+	}
 
 protected:
 

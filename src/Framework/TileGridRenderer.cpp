@@ -26,7 +26,9 @@ TileGridRenderer::TileGridRenderer(std::shared_ptr<gl::ShaderProgram> shader,
 	m_vao.attachVertexBuffer(1, 3, gl::VertexBufferObject::ComponentType::Float,
 			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, ux), sizeof(DynVertexAttribs), false);
 	m_vao.attachVertexBuffer(2, 4, gl::VertexBufferObject::ComponentType::UByte,
-			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, color), sizeof(DynVertexAttribs), true);
+			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, fgColor), sizeof(DynVertexAttribs), true);
+	m_vao.attachVertexBuffer(3, 4, gl::VertexBufferObject::ComponentType::UByte,
+			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, bgColor), sizeof(DynVertexAttribs), true);
 	m_vao.setIndexBuffer(&m_indexBuffer);
 	context->unbindVertexArray();
 
@@ -43,51 +45,14 @@ void TileGridRenderer::render(const Vector2i& location)
 	Matrix3f transform = m_projectionTransform * Matrix3f::translation(location.x, location.y);
 
 	m_colorTexCoordBuffer.invalidate();
-	{
-		auto dynBufferMapping = m_colorTexCoordBuffer.map<DynVertexAttribs>(gl::BufferObject::MappingOptions::Write);
-		for(int y = 0; y < gridWidth; ++y)
-		{
-			for(int x = 0; x < gridHeight; ++x)
-			{
-				int index = x + y * gridWidth;
-				int vertexIndex = index * 4;
-				const Tile& tile = m_grid->getTile(index);
-				TileSet::TileLocation loc = m_tileSet->getTileLocation(tile.tileIndex());
-				uint32_t color = tile.foregroundColor().toRGBAEndianAware();
-				if(x == 0 && y == 0)
-				{
-					glActiveTexture(GL_TEXTURE0);
-					loc.texture->bind();
-				}
-
-				dynBufferMapping[vertexIndex].ux = loc.bottomLeft.x;
-				dynBufferMapping[vertexIndex].uy = loc.bottomLeft.y;
-				dynBufferMapping[vertexIndex].uz = loc.layer;
-				dynBufferMapping[vertexIndex].color = color;
-				vertexIndex += 1;
-				dynBufferMapping[vertexIndex].ux = loc.bottomLeft.x;
-				dynBufferMapping[vertexIndex].uy = loc.topRight.y;
-				dynBufferMapping[vertexIndex].uz = loc.layer;
-				dynBufferMapping[vertexIndex].color = color;
-				vertexIndex += 1;
-				dynBufferMapping[vertexIndex].ux = loc.topRight.x;
-				dynBufferMapping[vertexIndex].uy = loc.topRight.y;
-				dynBufferMapping[vertexIndex].uz = loc.layer;
-				dynBufferMapping[vertexIndex].color = color;
-				vertexIndex += 1;
-				dynBufferMapping[vertexIndex].ux = loc.topRight.x;
-				dynBufferMapping[vertexIndex].uy = loc.bottomLeft.y;
-				dynBufferMapping[vertexIndex].uz = loc.layer;
-				dynBufferMapping[vertexIndex].color = color;
-			}
-		}
-	}
+	fillDynamicAttributeBuffer();
 
 	m_shader->bind();
 	m_vao.bind();
 	m_shader->setUniformValue("transform", transform);
 	m_shader->setUniformValue("texSampler", 0);
-	glDrawElements(GL_TRIANGLES, 6 * gridWidth * gridHeight, GL_UNSIGNED_INT, nullptr);
+	m_context->drawIndexedPrimitives(gl::PrimitiveType::Triangles, 6 * gridWidth * gridHeight,
+			gl::IndexFormat::UInt, 0);
 }
 
 void TileGridRenderer::initializeStaticBuffers()
@@ -135,4 +100,55 @@ void TileGridRenderer::initializeStaticBuffers()
 	}
 }
 
+void TileGridRenderer::fillDynamicAttributeBuffer()
+{
+	const int gridWidth = m_grid->width();
+	const int gridHeight = m_grid->height();
+
+	auto dynBufferMapping = m_colorTexCoordBuffer.map<DynVertexAttribs>(gl::BufferObject::MappingOptions::Write);
+	for(int y = 0; y < gridWidth; ++y)
+	{
+		for(int x = 0; x < gridHeight; ++x)
+		{
+			int index = x + y * gridWidth;
+			int vertexIndex = index * 4;
+			const Tile& tile = m_grid->getTile(index);
+			TileSet::TileLocation loc = m_tileSet->getTileLocation(tile.tileIndex());
+			uint32_t fgColor = tile.foregroundColor().toRGBAEndianAware();
+			uint32_t bgColor = tile.backgroundColor().toRGBAEndianAware();
+			if(x == 0 && y == 0)
+			{
+				m_context->setActiveTextureUnit(0);
+				loc.texture->bind();
+			}
+
+			dynBufferMapping[vertexIndex].ux = loc.bottomLeft.x;
+			dynBufferMapping[vertexIndex].uy = loc.bottomLeft.y;
+			dynBufferMapping[vertexIndex].uz = loc.layer;
+			dynBufferMapping[vertexIndex].fgColor = fgColor;
+			dynBufferMapping[vertexIndex].bgColor = bgColor;
+			vertexIndex += 1;
+			dynBufferMapping[vertexIndex].ux = loc.bottomLeft.x;
+			dynBufferMapping[vertexIndex].uy = loc.topRight.y;
+			dynBufferMapping[vertexIndex].uz = loc.layer;
+			dynBufferMapping[vertexIndex].fgColor = fgColor;
+			dynBufferMapping[vertexIndex].bgColor = bgColor;
+			vertexIndex += 1;
+			dynBufferMapping[vertexIndex].ux = loc.topRight.x;
+			dynBufferMapping[vertexIndex].uy = loc.topRight.y;
+			dynBufferMapping[vertexIndex].uz = loc.layer;
+			dynBufferMapping[vertexIndex].fgColor = fgColor;
+			dynBufferMapping[vertexIndex].bgColor = bgColor;
+			vertexIndex += 1;
+			dynBufferMapping[vertexIndex].ux = loc.topRight.x;
+			dynBufferMapping[vertexIndex].uy = loc.bottomLeft.y;
+			dynBufferMapping[vertexIndex].uz = loc.layer;
+			dynBufferMapping[vertexIndex].fgColor = fgColor;
+			dynBufferMapping[vertexIndex].bgColor = bgColor;
+		}
+	}
 }
+
+}
+
+

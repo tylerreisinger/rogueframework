@@ -34,4 +34,24 @@ TileGrid& TileGrid::operator =(TileGrid&& other) noexcept
 	return *this;
 }
 
+void TileGrid::writeString(int startX, int startY, const char* string)
+{
+	int x = startX;
+	const char* stringPtr = string;
+	while(x < m_width)
+	{
+		char ch = *stringPtr;
+		if(ch == '\0')
+		{
+			return;
+		}
+		m_tiles[x + m_width * startY].setTileIndex(ch);
+		++stringPtr;
+		++x;
+	}
 }
+
+}
+
+
+
