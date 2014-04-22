@@ -31,6 +31,8 @@ public:
 
 	void render(const Vector2i& location);
 
+	static std::shared_ptr<gl::ShaderProgram> createDefaultShaders(gl::Context* context);
+
 protected:
 
 	struct DynVertexAttribs

@@ -3,6 +3,8 @@
 #include "Framework/Gl/ShaderProgram.h"
 #include "Framework/TileSet.h"
 
+#include "Framework/Gl/Shader.h"
+
 namespace rf
 {
 
@@ -147,6 +149,68 @@ void TileGridRenderer::fillDynamicAttributeBuffer()
 			dynBufferMapping[vertexIndex].bgColor = bgColor;
 		}
 	}
+}
+
+std::shared_ptr<gl::ShaderProgram> TileGridRenderer::createDefaultShaders(gl::Context* context)
+{
+	std::string vertexShaderSource =
+		R"(
+		#version 140
+
+		uniform mat3 transform;
+
+		in vec2 position;
+		in vec3 tex;
+		in vec4 fgColor;
+	    in vec4 bgColor;
+
+	    out vec3 texCoord;
+	    out vec4 foregroundColor;
+	    out vec4 backgroundColor;
+		
+		void main()
+		{
+		    texCoord = tex;
+	        foregroundColor = fgColor;
+	        backgroundColor = bgColor;
+			gl_Position = vec4((transform * vec3(position, 1)).xy, 1, 1);
+		}
+		)";
+
+		std::string fragmentShaderSource =
+		R"(
+		#version 140
+
+		uniform sampler2DArray texSampler;
+
+		in vec3 texCoord;
+	    in vec4 foregroundColor;
+	    in vec4 backgroundColor;
+
+		out vec4 colorOut;
+
+		void main()
+		{
+	        vec4 texColor = texture(texSampler, texCoord);
+	        vec4 fgColor = texColor * foregroundColor;
+	        colorOut = vec4(fgColor.rgb * fgColor.a + backgroundColor.rgb 
+	                   * backgroundColor.a * (1.0 - fgColor.a), 1);
+		}
+		)";
+
+		std::shared_ptr<rf::gl::Shader> vertexShader = std::make_shared<gl::Shader>(rf::gl::Shader::ShaderType::Vertex, context);
+		vertexShader->compileSource(vertexShaderSource);
+		std::shared_ptr<rf::gl::Shader> fragmentShader = std::make_shared<gl::Shader>(rf::gl::Shader::ShaderType::Fragment, context);
+		fragmentShader->compileSource(fragmentShaderSource);
+		std::shared_ptr<rf::gl::ShaderProgram> shaderProg = std::make_shared<gl::ShaderProgram>(context);
+		shaderProg->attachShader(std::move(vertexShader));
+		shaderProg->attachShader(std::move(fragmentShader));
+		shaderProg->bindAttributeLocation("position", 0);
+		shaderProg->bindAttributeLocation("tex", 1);
+		shaderProg->bindAttributeLocation("fgColor", 2);
+		shaderProg->bindAttributeLocation("bgColor", 3);
+		shaderProg->link();
+		return shaderProg;
 }
 
 }
