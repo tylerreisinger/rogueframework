@@ -22,17 +22,7 @@ TileGridRenderer::TileGridRenderer(std::shared_ptr<gl::ShaderProgram> shader,
 
 	initializeStaticBuffers();
 
-	m_vao.bind();
-	m_vao.attachVertexBuffer(0, 2, gl::VertexBufferObject::ComponentType::Float,
-			&m_vertexBuffer, 0, 0, false);
-	m_vao.attachVertexBuffer(1, 3, gl::VertexBufferObject::ComponentType::Float,
-			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, ux), sizeof(DynVertexAttribs), false);
-	m_vao.attachVertexBuffer(2, 4, gl::VertexBufferObject::ComponentType::UByte,
-			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, fgColor), sizeof(DynVertexAttribs), true);
-	m_vao.attachVertexBuffer(3, 4, gl::VertexBufferObject::ComponentType::UByte,
-			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, bgColor), sizeof(DynVertexAttribs), true);
-	m_vao.setIndexBuffer(&m_indexBuffer);
-	context->unbindVertexArray();
+	createVertexArrayObject();
 
 	m_projectionTransform = Matrix3f::orthographicProjection(0, 800, 600, 0);
 }
@@ -211,6 +201,21 @@ std::shared_ptr<gl::ShaderProgram> TileGridRenderer::createDefaultShaders(gl::Co
 		shaderProg->bindAttributeLocation("bgColor", 3);
 		shaderProg->link();
 		return shaderProg;
+}
+
+void TileGridRenderer::createVertexArrayObject()
+{
+	m_vao.bind();
+	m_vao.attachVertexBuffer(0, 2, gl::VertexBufferObject::ComponentType::Float,
+			&m_vertexBuffer, 0, 0, false);
+	m_vao.attachVertexBuffer(1, 3, gl::VertexBufferObject::ComponentType::Float,
+			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, ux), sizeof(DynVertexAttribs), false);
+	m_vao.attachVertexBuffer(2, 4, gl::VertexBufferObject::ComponentType::UByte,
+			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, fgColor), sizeof(DynVertexAttribs), true);
+	m_vao.attachVertexBuffer(3, 4, gl::VertexBufferObject::ComponentType::UByte,
+			&m_colorTexCoordBuffer, offsetof(DynVertexAttribs, bgColor), sizeof(DynVertexAttribs), true);
+	m_vao.setIndexBuffer(&m_indexBuffer);
+	m_context->unbindVertexArray();
 }
 
 }

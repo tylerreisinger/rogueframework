@@ -47,6 +47,7 @@ protected:
 
 	void initializeStaticBuffers();
 	void fillDynamicAttributeBuffer();
+	void createVertexArrayObject();
 
 	gl::Context* m_context;
 

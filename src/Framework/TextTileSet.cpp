@@ -8,35 +8,27 @@
 namespace rf
 {
 
-TextTileSet::TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* context):
+TextTileSet::TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* context,
+		int maxTiles):
 	m_fontFace(std::move(fontFace)),
 	m_tiles(maxTiles, std::bind(&TextTileSet::onCacheDrop, this, std::placeholders::_1, std::placeholders::_2)),
-	m_context(context)
+	m_context(context), m_maxTiles(maxTiles)
 {
 	m_freeSlots.reserve(maxTiles);
-	int tilesPerRow = textureWidth / tileWidth();
-	int rows = textureHeight / tileHeight();
 
-	int tilesPerTex = tilesPerRow * rows;
-	int layers = std::ceil(static_cast<double>(maxTiles) / tilesPerTex);
-	m_tilesTexture.reset(new gl::TextureArray2d(textureWidth, textureHeight, layers,
+	auto size = computeTextureSize();
+	m_textureWidth = size.x;
+	m_textureHeight = size.y;
+
+	int tilesPerTex = tilesPerRow() * rows();
+	m_textureLayers = std::ceil(static_cast<double>(maxTiles) / tilesPerTex);
+	m_tilesTexture.reset(new gl::TextureArray2d(m_textureWidth, m_textureHeight, m_textureLayers,
 			1, gl::Texture::InternalPixelFormat::RGBA8, context));
 
-	m_cellWidth = 1.0f / tilesPerRow;
-	m_cellHeight = 1.0f / rows;
+	m_cellWidth = tileWidth() / static_cast<double>(m_textureWidth);
+	m_cellHeight = tileHeight() / static_cast<double>(m_textureHeight);
 
-	for(int i = maxTiles - 1; i >= 0; --i)
-	{
-		int x = i % tilesPerRow;
-		int y = (i / tilesPerRow) % rows;
-		int z = i / tilesPerRow / rows;
-
-		float startX = x * m_cellWidth;
-		float startY = y * m_cellHeight;
-
-		m_freeSlots.push_back(TileLocation{m_tilesTexture.get(), Vector2f(startX, startY),
-			Vector2f(startX + m_cellWidth, startY + m_cellHeight), z, 0});
-	}
+	addInitialSlots();
 }
 
 TextTileSet::TileLocation TextTileSet::getTileLocation(int index)
@@ -48,7 +40,7 @@ TextTileSet::TileLocation TextTileSet::getTileLocation(int index)
 	}
 	else
 	{
-		if(m_tiles.size() >= maxTiles - 1)
+		if(m_tiles.size() >= m_maxTiles - 1)
 		{
 			m_tiles.dropOne();
 		}
@@ -66,7 +58,10 @@ void TextTileSet::addGlyph(TileLocation& location, int character)
 
 	auto bitmapData = copyGlyphBitmap(glyph);
 
-	Rectanglei tileLocation(location.bottomLeft * textureWidth, location.topRight * textureHeight);
+	Rectanglei tileLocation{static_cast<int>(location.bottomLeft.x * m_textureWidth),
+							static_cast<int>(location.bottomLeft.y * m_textureHeight),
+							tileWidth(),
+							tileHeight()};
 
 	m_tilesTexture->bind();
 	m_tilesTexture->setData(tileLocation, location.layer, 1, 0, gl::Texture::DataPixelFormat::BGRA,
@@ -110,6 +105,52 @@ void TextTileSet::onCacheDrop(const int& character,
 		const TileLocation& location)
 {
 	m_freeSlots.push_back(location);
+}
+
+Vector2i TextTileSet::computeTextureSize()
+{
+	Vector2i size = {1024, 1024};
+	int area = tileWidth() * tileHeight() * m_maxTiles;
+	for(int width = 8; width < 2048; width <<= 1)
+	{
+		bool found = false;
+		for(int height = width >> 1; height < width << 2; height <<= 1)
+		{
+			int tilesPerRow = width / tileWidth();
+			int rows = height / tileHeight();
+			if(tilesPerRow * rows >= m_maxTiles)
+			{
+				size = {width, height};
+				found = true;
+				break;
+			}
+		}
+		if(found)
+		{
+			break;
+		}
+	}
+
+	return size;
+}
+
+void TextTileSet::addInitialSlots()
+{
+	int cols = tilesPerRow();
+	int rowsVal = rows();
+
+	for(int i = static_cast<int>(m_maxTiles - 1); i >= 0; --i)
+	{
+		int x = i % cols;
+		int y = (i / cols) % rowsVal;
+		int z = i / cols / rowsVal;
+
+		float startX = static_cast<float>(x * m_cellWidth);
+		float startY = static_cast<float>(y * m_cellHeight);
+
+		m_freeSlots.push_back(TileLocation{m_tilesTexture.get(), Vector2f(startX, startY),
+			Vector2f(startX + m_cellWidth, startY + m_cellHeight), z, 0});
+	}
 }
 
 }

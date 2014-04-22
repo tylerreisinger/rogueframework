@@ -23,7 +23,8 @@ class TextureArray2d;
 class TextTileSet : public TileSet
 {
 public:
-	TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* context);
+	TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* context,
+			int maxTiles);
 	~TextTileSet() = default;
 
 	virtual int tileWidth() const override {return m_fontFace->maxAdvanceWidth();}
@@ -31,9 +32,13 @@ public:
 
 	virtual TileLocation getTileLocation(int index) override;
 
-	static constexpr int maxTiles = 2500;
-	static constexpr int textureWidth = 1024;
-	static constexpr int textureHeight = 1024;
+	int textureWidth() const {return m_textureWidth;}
+	int textureHeight() const {return m_textureHeight;}
+	int textureLayers() const {return m_textureLayers;}
+
+	int tilesPerRow() const {return textureWidth() / tileWidth();}
+	int rows() const {return textureHeight() / tileHeight();}
+
 
 protected:
 
@@ -41,14 +46,21 @@ protected:
 	std::unique_ptr<uint32_t []> copyGlyphBitmap(std::shared_ptr<const BitmapGlyph> glyph);
 	void onCacheDrop(const int& character, const TileLocation& location);
 
+	Vector2i computeTextureSize();
+	void addInitialSlots();
+
 	std::shared_ptr<const FontFace> m_fontFace;
 	std::unique_ptr<gl::TextureArray2d> m_tilesTexture;
 	LruCache<int, TileLocation> m_tiles;
 	std::vector<TileLocation> m_freeSlots;
 	gl::Context* m_context;
 
-	float m_cellWidth;
-	float m_cellHeight;
+	double m_cellWidth;
+	double m_cellHeight;
+	int m_maxTiles;
+	int m_textureWidth;
+	int m_textureHeight;
+	int m_textureLayers;
 };
 
 }
