@@ -36,6 +36,8 @@ public:
 
 	virtual BufferBindTarget getTarget() const override {return BufferBindTarget::IndexBuffer;}
 
+	virtual void bind() const override;
+
 protected:
 	IndexBufferObject() : BufferObject() {};
 

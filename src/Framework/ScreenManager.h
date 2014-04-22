@@ -105,6 +105,9 @@ public:
 	///Deactivate all overlay screens
 	void removeAllOverlays();
 
+	void draw();
+	void update();
+
 protected:
 
 	std::unordered_map<std::string, std::unique_ptr<Screen>> m_screens;

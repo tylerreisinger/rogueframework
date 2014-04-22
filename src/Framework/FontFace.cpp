@@ -148,7 +148,7 @@ void FontFace::setCharacterSize(int width, int height)
 	}
 }
 
-FT_Glyph FontFace::getGlyph(char32_t character) const
+FT_Glyph FontFace::loadGlyph(char32_t character) const
 {
 	FT_Glyph ftGlyph;
 
@@ -179,12 +179,12 @@ std::shared_ptr<Glyph> FontFace::constructGlyphObject(FT_Glyph glyph) const
 	}
 }
 
-std::shared_ptr<Glyph> FontFace::loadGlyph(char32_t character) const
+std::shared_ptr<Glyph> FontFace::getGlyph(char32_t character) const
 {
 	std::shared_ptr<Glyph>* glyphPtr = m_cache.getItem(character);
 	if(glyphPtr == nullptr)
 	{
-		FT_Glyph ftGlyph = getGlyph(character);
+		FT_Glyph ftGlyph = loadGlyph(character);
 
 		auto glyph = constructGlyphObject(ftGlyph);
 		m_cache.addItem(character, glyph);

@@ -18,6 +18,8 @@ class BufferObject;
 class VertexBufferObject;
 class IndexBufferObject;
 class TextureArray2d;
+class VertexArrayObject;
+class ShaderProgram;
 
 class Context
 {
@@ -25,6 +27,8 @@ public:
 
 	enum class Settings : GLenum
 	{
+		Blend = GL_BLEND,
+		CullFace = GL_CULL_FACE,
 		DepthTest = GL_DEPTH_TEST,
 		Dither = GL_DITHER
 	};
@@ -38,6 +42,11 @@ public:
 	void bindBuffer(BufferBindTarget target, const BufferObject& buffer);
 	void bindBuffer(const VertexBufferObject& buffer);
 	void bindBuffer(const IndexBufferObject& buffer);
+
+	void bind(const VertexArrayObject& object);
+	void unbindVertexArray();
+
+	void bindShaderProgram(const ShaderProgram& object);
 
 	void clear(const Flags<ClearFlags>& flags);
 	void setClearColor(const Color& color);

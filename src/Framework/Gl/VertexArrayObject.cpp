@@ -58,5 +58,10 @@ void VertexArrayObject::destroy()
 	}
 }
 
+void VertexArrayObject::bind() const
+{
+	m_context->bind(*this);
+}
+
 }
 }

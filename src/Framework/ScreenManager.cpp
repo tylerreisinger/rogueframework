@@ -166,4 +166,20 @@ void ScreenManager::removeAllOverlays()
 	m_overlayStack.clear();
 }
 
+void ScreenManager::draw()
+{
+	if(m_activeScreen)
+	{
+		m_activeScreen->draw();
+	}
+}
+
+void ScreenManager::update()
+{
+	if(m_activeScreen)
+	{
+		m_activeScreen->update();
+	}
+}
+
 }

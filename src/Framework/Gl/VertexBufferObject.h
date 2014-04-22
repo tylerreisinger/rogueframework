@@ -39,6 +39,8 @@ public:
 
 	virtual BufferBindTarget getTarget() const override {return BufferBindTarget::ArrayBuffer;}
 
+	virtual void bind() const override;
+
 protected:
 	VertexBufferObject() : BufferObject() {};
 };

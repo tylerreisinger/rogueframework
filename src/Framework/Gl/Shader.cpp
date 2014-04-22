@@ -20,11 +20,7 @@ Shader::Shader(ShaderType type, Context* context): GlObject(0, context),
 
 Shader::~Shader()
 {
-	if(m_handle)
-	{
-		glDeleteShader(m_handle);
-		CHECK_GL_ERROR(glDeleteShader);
-	}
+	destroy();
 }
 
 void Shader::compileSource(const std::string& source)
@@ -44,8 +40,12 @@ Shader::Shader(Shader&& other) noexcept: GlObject(std::move(other)),
 
 Shader& Shader::operator =(Shader&& other) noexcept
 {
-	GlObject::operator =(std::move(other));
-	m_type = other.m_type;
+	if(&other != this)
+	{
+		destroy();
+		GlObject::operator =(std::move(other));
+		m_type = other.m_type;
+	}
 	return *this;
 }
 
@@ -89,6 +89,14 @@ std::string Shader::getInfoLog() const
 		logText = text.get();
 	}
 	return logText;
+}
+
+void Shader::destroy()
+{
+	if(m_handle)
+	{
+		glDeleteShader(m_handle);
+	}
 }
 
 }

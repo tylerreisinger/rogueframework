@@ -34,6 +34,8 @@ public:
 
 	virtual void destroy() override;
 
+	void bind() const;
+
 protected:
 };
 

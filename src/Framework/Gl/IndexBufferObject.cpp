@@ -36,6 +36,11 @@ IndexBufferObject& IndexBufferObject::operator =(IndexBufferObject other)
 	return *this;
 }
 
+void IndexBufferObject::bind() const
+{
+	m_context->bindBuffer(*this);
+}
+
 }
 }
 

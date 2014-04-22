@@ -43,6 +43,8 @@ public:
 	///Return the number of layers in the array
 	int layers() const {return m_layers;}
 
+	virtual void bind() const override;
+
 	///Generate mipmap images based on the base level image stored in the Texture.
 	void generateMipmap();
 

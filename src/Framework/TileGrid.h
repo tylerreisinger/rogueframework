@@ -6,8 +6,6 @@
 #include <vector>
 #include <cstring>
 
-#include "Vector2.h"
-
 namespace rf
 {
 
@@ -22,7 +20,7 @@ class TileGrid
 {
 public:
 
-	TileGrid(int width, int height, const Vector2i& location);
+	TileGrid(int width, int height);
 	virtual ~TileGrid() = default;
 
 	TileGrid(const TileGrid& other);
@@ -31,13 +29,15 @@ public:
 	TileGrid& operator =(TileGrid&& other) noexcept;
 
 	Tile& operator [](size_t index) {return getTile(index);}
+	const Tile& operator [](size_t index) const {return getTile(index);}
 
 	int width() const {return m_width;}
 	int height() const {return m_height;}
-	const Vector2i location() const {return m_location;}
 
 	Tile& getTile(size_t index) {return m_tiles[index];}
 	Tile& getTile(int x, int y) {return m_tiles[x + m_width * y];}
+	const Tile& getTile(size_t index) const {return m_tiles[index];}
+	const Tile& getTile(int x, int y) const {return m_tiles[x + m_width * y];}
 
 	void setTile(size_t index, const Tile& tile) {m_tiles[index] = tile;}
 	void setTile(int x, int y, const Tile& tile) {m_tiles[x + m_width * y] = tile;}
@@ -46,7 +46,6 @@ protected:
 
 	int m_width;
 	int m_height;
-	Vector2i m_location;
 
 	std::vector<Tile> m_tiles;
 };

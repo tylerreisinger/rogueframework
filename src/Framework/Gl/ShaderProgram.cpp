@@ -19,11 +19,7 @@ ShaderProgram::ShaderProgram(Context* context) : GlObject(0, context)
 
 ShaderProgram::~ShaderProgram()
 {
-	if(m_handle != 0)
-	{
-		glDeleteProgram(m_handle);
-		CHECK_GL_ERROR(glDeleteProgram);
-	}
+	destroy();
 }
 
 ShaderProgram::ShaderProgram(ShaderProgram&& other) noexcept: GlObject(std::move(other)),
@@ -41,11 +37,11 @@ ShaderProgram& ShaderProgram::operator =(ShaderProgram&& other) noexcept
 	return *this;
 }
 
-void ShaderProgram::attachShader(std::shared_ptr<Shader>& shader)
+void ShaderProgram::attachShader(std::shared_ptr<Shader> shader)
 {
 	glAttachShader(m_handle, shader->handle());
 	CHECK_GL_ERROR(glAttachShader);
-	m_shaders.push_back(shader);
+	m_shaders.push_back(std::move(shader));
 }
 
 void ShaderProgram::link()
@@ -390,6 +386,11 @@ void ShaderProgram::setUniformValue(int location, const Matrix4d& value)
 	CHECK_GL_ERROR(glUniformMatrix3fv);
 }
 
+void ShaderProgram::bind() const
+{
+	m_context->bindShaderProgram(*this);
+}
+
 std::string ShaderProgram::getInfoLog() const
 {
 	int length = 0;
@@ -406,6 +407,15 @@ std::string ShaderProgram::getInfoLog() const
 		logText = text.get();
 	}
 	return logText;
+}
+
+void ShaderProgram::destroy()
+{
+	if(m_handle != 0)
+	{
+		glDeleteProgram(m_handle);
+		CHECK_GL_ERROR(glDeleteProgram);
+	}
 }
 
 }

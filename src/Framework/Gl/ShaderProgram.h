@@ -36,7 +36,7 @@ public:
 	ShaderProgram(ShaderProgram&& other) noexcept;
 	ShaderProgram& operator =(ShaderProgram&& other) noexcept;
 
-	void attachShader(std::shared_ptr<Shader>& shader);
+	void attachShader(std::shared_ptr<Shader> shader);
 	void link();
 
 	int getAttributeLocation(const char* name);
@@ -50,6 +50,8 @@ public:
 
 	int getUniformLocation(const char* name);
 	int getUniformLocation(const std::string& name) {return getUniformLocation(name.c_str());}
+
+	void bind() const;
 
 	void setUniformValue(int location, int value);
 	void setUniformValue(int location, unsigned int value);
@@ -139,6 +141,8 @@ public:
 	void setUniformValueArray(const char* name, int components, const std::array<float, N>& values);
 
 	std::string getInfoLog() const;
+
+	virtual void destroy() override;
 
 protected:
 	std::vector<std::shared_ptr<Shader>> m_shaders;
@@ -354,7 +358,7 @@ inline void ShaderProgram::setUniformValueArray(int location, int components,
 {
 	setUniformValueArray(location, components, values.data(), N / components);
 }
-
+/*
 void ShaderProgram::setUniformValueArray(const char* name, int components,
 		const int* values, int count)
 {
@@ -372,7 +376,7 @@ void ShaderProgram::setUniformValueArray(const char* name, int components,
 {
 	setUniformValueArray(getAttributeLocation(name), components, values, count);
 }
-
+*/
 template<size_t N>
 inline void ShaderProgram::setUniformValueArray(const char* name,
 		int components, const std::array<int, N>& values)
@@ -393,6 +397,8 @@ inline void ShaderProgram::setUniformValueArray(const char* name,
 {
 	setUniformValueArray(getAttributeLocation(name), components, values);
 }
+
+
 
 }
 }

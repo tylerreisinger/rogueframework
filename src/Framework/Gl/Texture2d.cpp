@@ -108,6 +108,11 @@ void Texture2d::generateMipmap()
 	CHECK_GL_ERROR(glGenerateMipmap);
 }
 
+void Texture2d::bind() const
+{
+	m_context->bindTexture(*this);
+}
+
 void Texture2d::destroy()
 {
 	if(m_handle != 0)

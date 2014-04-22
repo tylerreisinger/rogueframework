@@ -29,8 +29,10 @@ public:
 	template <typename T>
 	class Mapping
 	{
+	public:
 		friend class BufferObject;
 
+		Mapping() {}
 		~Mapping();
 
 		Mapping(const Mapping&) = delete;
@@ -38,6 +40,19 @@ public:
 
 		Mapping(Mapping&&) noexcept;
 		Mapping& operator =(Mapping&&) noexcept;
+
+		Mapping& operator =(nullptr_t)
+		{
+			if(m_bufferObject != nullptr)
+			{
+				m_bufferObject->bind();
+				m_bufferObject->unmap();
+			}
+			m_bufferObject = nullptr;
+			m_size = 0;
+			m_buffer = nullptr;
+			return *this;
+		}
 
 		T& operator [](intptr_t index) {return m_buffer[index];}
 
@@ -97,6 +112,8 @@ public:
 	void setData(const std::vector<T>& data) {setData(data.data(), data.size() * sizeof(T));}
 	template <typename T, size_t N>
 	void setData(const std::array<T, N>& data) {setData(data.data(), N * sizeof(T));}
+	void allocate(size_t size);
+	void invalidate();
 
 	void setSubData(const void* data, size_t sizeInBytes, intptr_t offset);
 
@@ -133,6 +150,8 @@ public:
 	virtual BufferBindTarget getTarget() const = 0;
 
 	virtual void destroy() override;
+
+	virtual void bind() const = 0;
 
 protected:
 	BufferObject() {};
@@ -178,6 +197,7 @@ inline BufferObject::Mapping<T>::~Mapping()
 {
 	if(m_bufferObject != nullptr)
 	{
+		m_bufferObject->bind();
 		m_bufferObject->unmap();
 	}
 }
@@ -194,10 +214,18 @@ inline BufferObject::Mapping<T>::Mapping(Mapping&& mapping) noexcept
 template<typename T>
 inline BufferObject::Mapping<T>& BufferObject::Mapping<T>::operator =(Mapping&& mapping) noexcept
 {
-	m_bufferObject = mapping.m_bufferObject;
-	m_buffer = mapping.m_buffer;
-	mapping.m_bufferObject = nullptr;
-	mapping.m_buffer = nullptr;
+	if(&mapping != this)
+	{
+		if(m_bufferObject != nullptr)
+		{
+			m_bufferObject->unmap();
+		}
+		m_bufferObject = mapping.m_bufferObject;
+		m_buffer = mapping.m_buffer;
+		mapping.m_bufferObject = nullptr;
+		mapping.m_buffer = nullptr;
+		mapping.m_size = 0;
+	}
 	return *this;
 }
 

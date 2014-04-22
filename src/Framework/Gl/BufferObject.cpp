@@ -120,6 +120,19 @@ void* BufferObject::mapRaw(intptr_t startOffset, size_t count,
 	return ret;
 }
 
+void BufferObject::allocate(size_t size)
+{
+	glBufferData(static_cast<GLenum>(getTarget()), size, nullptr, static_cast<GLenum>(m_usage));
+	CHECK_GL_ERROR(glBufferData);
+	m_size = size;
+}
+
+void BufferObject::invalidate()
+{
+	glBufferData(static_cast<GLenum>(getTarget()), m_size, nullptr, static_cast<GLenum>(m_usage));
+	CHECK_GL_ERROR(glBufferData);
+}
+
 void BufferObject::destroy()
 {
 	if(m_handle != 0)

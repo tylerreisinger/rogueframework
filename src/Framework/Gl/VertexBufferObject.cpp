@@ -28,6 +28,11 @@ VertexBufferObject& VertexBufferObject::operator =(VertexBufferObject other)
 	return *this;
 }
 
+void VertexBufferObject::bind() const
+{
+	m_context->bindBuffer(*this);
+}
+
 }
 }
 

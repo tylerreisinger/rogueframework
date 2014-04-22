@@ -31,6 +31,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/Texture2d.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/TextureArray2d.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/TextureArray2d.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexArrayObject.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexArrayObject.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Gl/VertexBufferObject.cpp
@@ -68,10 +70,17 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Screen.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/ScreenManager.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TextTileSet.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TextTileSet.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridRenderer.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridRenderer.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileSet.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileSet.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector2.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector3.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Vector4.h

@@ -138,7 +138,7 @@ public:
 	CharMap currentCharMap() const;
 	bool hasCharMap(CharMapEncoding encoding) const;
 
-	std::shared_ptr<Glyph> loadGlyph(char32_t character) const;
+	std::shared_ptr<Glyph> getGlyph(char32_t character) const;
 
 	long glyphCount() const {return m_face->num_glyphs;}
 	Flags<StyleFlags> getStyleFlags() const {return Flags<StyleFlags>(static_cast<StyleFlags>(m_face->style_flags));}
@@ -166,7 +166,7 @@ protected:
 
 	static float frac266ToFloat(int val) {return val / 64.f;}
 
-	FT_Glyph getGlyph(char32_t character) const;
+	FT_Glyph loadGlyph(char32_t character) const;
 	std::shared_ptr<Glyph> constructGlyphObject(FT_Glyph glyph) const;
 
 	mutable LruCache<char32_t, std::shared_ptr<Glyph>> m_cache;

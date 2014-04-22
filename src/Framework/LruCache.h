@@ -11,8 +11,8 @@ template<typename Key, typename Type>
 class LruCache
 {
 public:
-	LruCache(size_t capacity):
-		m_capacity(capacity)
+	LruCache(size_t capacity, std::function<void (const Key&, const Type&)> deletionCallback = nullptr):
+		m_capacity(capacity), m_deletionCallback(std::move(deletionCallback))
 	{
 	}
 
@@ -50,9 +50,19 @@ public:
 	bool empty() const {return m_items.empty();}
 	size_t capacity() const {return m_capacity;}
 
+	void dropOne();
+
 protected:
-	std::unordered_map<Key, Type> m_items;
+
+	struct CacheItem
+	{
+		Type value;
+		typename std::list<Key>::iterator it;
+	};
+
+	std::unordered_map<Key, CacheItem> m_items;
 	std::list<Key> m_order;
+	std::function<void (const Key&, const Type&)> m_deletionCallback;
 
 	size_t m_capacity;
 };
@@ -63,7 +73,11 @@ inline Type* LruCache<Key, Type>::getItem(const Key& key)
 	auto it = m_items.find(key);
 	if(it != m_items.end())
 	{
-		return &it->second;
+		m_order.splice(m_order.begin(), m_order, it->second.it);
+		//m_order.erase(it->second.it);
+		//m_order.push_front(key);
+		it->second.it = m_order.begin();
+		return &it->second.value;
 	}
 
 	return nullptr;
@@ -72,13 +86,13 @@ inline Type* LruCache<Key, Type>::getItem(const Key& key)
 template<typename Key, typename Type>
 inline void LruCache<Key, Type>::addItem(const Key& key, Type item)
 {
-	m_items.insert(std::make_pair(key, std::move(item)));
 	m_order.push_front(key);
+	CacheItem cacheItem = {std::move(item), m_order.begin()};
+	m_items.insert(std::make_pair(key, cacheItem));
+
 	if(m_items.size() > m_capacity)
 	{
-		auto& item = m_order.back();
-		m_items.erase(item);
-		m_order.pop_back();
+		dropOne();
 	}
 }
 
@@ -103,6 +117,16 @@ inline void LruCache<Key, Type>::clear()
 
 }
 
-
+template<typename Key, typename Type>
+inline void rf::LruCache<Key, Type>::dropOne()
+{
+	auto& item = m_order.back();
+	if(m_deletionCallback)
+	{
+		m_deletionCallback(item, m_items[item].value);
+	}
+	m_items.erase(item);
+	m_order.pop_back();
+}
 
 #endif

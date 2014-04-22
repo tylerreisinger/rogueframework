@@ -131,6 +131,8 @@ public:
 
 	Texture(Texture&& other) = default;
 	Texture& operator =(Texture&& other) = default;
+
+	virtual void bind() const = 0;
 };
 
 }

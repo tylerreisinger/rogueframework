@@ -54,6 +54,8 @@ public:
 	///Generate mipmap images based on the base level image stored in the Texture.
 	void generateMipmap();
 
+	virtual void bind() const override;
+
 protected:
 	virtual void destroy() override;
 	void initializeParams();

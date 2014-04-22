@@ -20,16 +20,16 @@ TextureArray2d::TextureArray2d(int width, int height, int layers, int mipmapLeve
 
 	context->bindTexture(*this);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipmapLevels);
+	glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_LEVEL, mipmapLevels);
 	CHECK_GL_ERROR(glTexParameteri);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	CHECK_GL_ERROR(glTexParameteri);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	CHECK_GL_ERROR(glTexParameteri);
 
 #if GL_TARGET_VERSION >= 402
@@ -43,7 +43,7 @@ TextureArray2d::TextureArray2d(int width, int height, int layers, int mipmapLeve
 	for(int i = 0; i < mipmapLevels; ++i)
 	{
 		glTexImage3D(GL_TEXTURE_2D_ARRAY, i, static_cast<GLenum>(internalFormat), levelWidth, levelHeight, layers, 0,
-				GL_UNSIGNED_BYTE, GL_UNSIGNED_BYTE, nullptr);
+				GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 		CHECK_GL_ERROR(glTexImage3D);
 		if(levelWidth == 1 && levelHeight == 1)
 		{
@@ -120,6 +120,11 @@ void TextureArray2d::generateMipmap()
 	CHECK_GL_ERROR(glGenerateMipmap);
 }
 
+void TextureArray2d::bind() const
+{
+	m_context->bindTexture(*this);
+}
+
 void TextureArray2d::destroy()
 {
 	if(m_handle != 0)
@@ -130,3 +135,5 @@ void TextureArray2d::destroy()
 
 }
 }
+
+
