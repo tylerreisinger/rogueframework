@@ -74,8 +74,6 @@ inline Type* LruCache<Key, Type>::getItem(const Key& key)
 	if(it != m_items.end())
 	{
 		m_order.splice(m_order.begin(), m_order, it->second.it);
-		//m_order.erase(it->second.it);
-		//m_order.push_front(key);
 		it->second.it = m_order.begin();
 		return &it->second.value;
 	}
