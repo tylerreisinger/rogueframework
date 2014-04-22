@@ -4,6 +4,8 @@ namespace rf
 {
 
 TileGrid::TileGrid(int width, int height):
+	m_defaultState(Tile(Color::white(), Color::black(), 0)),
+	m_clearState(Tile(Color::white(), Color::black(), ' ')),
 	m_width(width), m_height(height), m_tiles(width * height)
 {
 }
@@ -34,22 +36,38 @@ TileGrid& TileGrid::operator =(TileGrid&& other) noexcept
 	return *this;
 }
 
-void TileGrid::writeString(int startX, int startY, const char* string)
+void TileGrid::writeString(int startX, int startY, const char* string, TextWrappingMode wrapMode)
 {
 	int x = startX;
+	int y = startY;
 	const char* stringPtr = string;
-	while(x < m_width)
+	while(true)
 	{
 		char ch = *stringPtr;
 		if(ch == '\0')
 		{
-			return;
+			break;
 		}
-		m_tiles[x + m_width * startY].setTileIndex(ch);
+		m_tiles[x + m_width * y] = m_defaultState;
+		m_tiles[x + m_width * y].setTileIndex(ch);
 		++stringPtr;
 		++x;
+		if(x >= m_width)
+		{
+			if(wrapMode == TextWrappingMode::Wrap)
+			{
+				y++;
+				x = 0;
+			}
+			else
+			{
+				break;
+			}
+		}
 	}
 }
+
+
 
 }
 
