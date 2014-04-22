@@ -65,5 +65,13 @@ void Context::bindBuffer(BufferBindTarget target,
 	CHECK_GL_ERROR(glBindBuffer);
 }
 
+void Context::drawIndexedPrimitives(PrimitiveType type, int count,
+		IndexFormat indexFormat, uintptr_t offset)
+{
+	glDrawElements(static_cast<GLenum>(type), count, static_cast<GLenum>(indexFormat),
+			reinterpret_cast<void*>(offset));
+	CHECK_GL_ERROR(glDrawElements);
+}
+
 }
 }
