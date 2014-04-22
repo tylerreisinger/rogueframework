@@ -27,6 +27,11 @@ public:
 			int maxTiles);
 	~TextTileSet() = default;
 
+	TextTileSet(const TextTileSet&) = delete;
+	TextTileSet(TextTileSet&& other) noexcept;
+	TextTileSet& operator =(const TextTileSet&) = delete;
+	TextTileSet& operator =(TextTileSet&& other) noexcept;
+
 	virtual int tileWidth() const override {return m_fontFace->maxAdvanceWidth();}
 	virtual int tileHeight() const override {return m_fontFace->lineHeight();}
 

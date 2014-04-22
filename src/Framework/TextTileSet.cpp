@@ -134,6 +134,34 @@ Vector2i TextTileSet::computeTextureSize()
 	return size;
 }
 
+TextTileSet::TextTileSet(TextTileSet&& other) noexcept:
+	m_fontFace(std::move(other.m_fontFace)), m_tilesTexture(std::move(other.m_tilesTexture)),
+	m_tiles(std::move(other.m_tiles)), m_freeSlots(std::move(other.m_freeSlots)),
+	m_context(other.m_context), m_cellWidth(other.m_cellWidth), m_cellHeight(other.m_cellHeight),
+	m_maxTiles(other.m_maxTiles), m_textureWidth(other.m_textureWidth),
+	m_textureHeight(other.m_textureHeight), m_textureLayers(other.m_textureLayers)
+{
+
+}
+
+TextTileSet& TextTileSet::operator =(TextTileSet&& other) noexcept
+{
+	m_fontFace = std::move(other.m_fontFace);
+	m_tilesTexture = std::move(other.m_tilesTexture);
+	m_tiles = std::move(other.m_tiles);
+	m_freeSlots = std::move(other.m_freeSlots);
+	m_context = other.m_context;
+	m_cellWidth = other.m_cellWidth;
+	m_cellHeight = other.m_cellHeight;
+	m_maxTiles = other.m_maxTiles;
+	m_textureWidth = other.m_textureWidth;
+	m_textureHeight = other.m_textureHeight;
+	m_textureLayers = other.m_textureLayers;
+	other.m_maxTiles = 0;
+	other.m_context = nullptr;
+	return *this;
+}
+
 void TextTileSet::addInitialSlots()
 {
 	int cols = tilesPerRow();

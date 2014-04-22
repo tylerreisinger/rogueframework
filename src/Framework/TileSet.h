@@ -28,6 +28,11 @@ public:
 	TileSet();
 	virtual ~TileSet();
 
+	TileSet(const TileSet&) = default;
+	TileSet(TileSet&&) = default;
+	TileSet& operator =(const TileSet&) = default;
+	TileSet& operator =(TileSet&&) = default;
+
 	virtual int tileWidth() const = 0;
 	virtual int tileHeight() const = 0;
 	virtual TileLocation getTileLocation(int index) = 0;
