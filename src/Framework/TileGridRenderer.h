@@ -21,7 +21,7 @@ class TileGridRenderer
 {
 public:
 	TileGridRenderer(std::shared_ptr<gl::ShaderProgram> shader, gl::Context* context,
-			const TileGrid* grid, TileSet* tileSet);
+			const Matrix3f& transform, const TileGrid* grid, TileSet* tileSet);
 	~TileGridRenderer() = default;
 
 	TileGridRenderer(const TileGridRenderer&) = delete;

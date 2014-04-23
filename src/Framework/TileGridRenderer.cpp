@@ -9,13 +9,13 @@ namespace rf
 {
 
 TileGridRenderer::TileGridRenderer(std::shared_ptr<gl::ShaderProgram> shader,
-		gl::Context* context, const TileGrid* grid, TileSet* tileSet):
+		gl::Context* context, const Matrix3f& transform, const TileGrid* grid, TileSet* tileSet):
 	m_shader(std::move(shader)),
 	m_context(context), m_grid(grid), m_tileSet(tileSet),
 	m_vertexBuffer(gl::VertexBufferObject::UsageType::StaticDraw, context),
 	m_colorTexCoordBuffer(gl::VertexBufferObject::UsageType::StreamDraw, context),
 	m_indexBuffer(gl::BufferObject::UsageType::StaticDraw, gl::IndexBufferObject::IndexFormat::UInt, context),
-	m_vao(context)
+	m_vao(context), m_projectionTransform(transform)
 {
 	m_colorTexCoordBuffer.bind();
 	m_colorTexCoordBuffer.allocate(m_grid->width() * m_grid->height() * verticesPerTile * sizeof(DynVertexAttribs));
@@ -23,8 +23,6 @@ TileGridRenderer::TileGridRenderer(std::shared_ptr<gl::ShaderProgram> shader,
 	initializeStaticBuffers();
 
 	createVertexArrayObject();
-
-	m_projectionTransform = Matrix3f::orthographicProjection(0, 800, 600, 0);
 }
 
 void TileGridRenderer::render(const Vector2i& location)
@@ -34,7 +32,7 @@ void TileGridRenderer::render(const Vector2i& location)
 	const int tileWidth = m_tileSet->tileWidth();
 	const int tileHeight = m_tileSet->tileHeight();
 
-	Matrix3f transform = m_projectionTransform * Matrix3f::translation(location.x, location.y);
+	Matrix3f transform = Matrix3f::translation(location.x, location.y) * m_projectionTransform;
 
 	m_colorTexCoordBuffer.invalidate();
 	fillDynamicAttributeBuffer();
