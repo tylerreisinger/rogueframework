@@ -106,8 +106,8 @@ void TileGridRenderer::fillDynamicAttributeBuffer()
 			int vertexIndex = index * 4;
 			const Tile& tile = m_grid->getTile(index);
 			TileSet::TileLocation loc = m_tileSet->getTileLocation(tile.tileIndex());
-			uint32_t fgColor = tile.foregroundColor().toRGBAEndianAware();
-			uint32_t bgColor = tile.backgroundColor().toRGBAEndianAware();
+			uint32_t fgColor = tile.foregroundColor().toRgbaEndianAware();
+			uint32_t bgColor = tile.backgroundColor().toRgbaEndianAware();
 			if(x == 0 && y == 0)
 			{
 				m_context->setActiveTextureUnit(0);

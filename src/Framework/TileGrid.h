@@ -60,18 +60,18 @@ public:
 	}
 
 	void fill(const Tile& newTile);
-	void fillForegroundColor(const Colorf& color);
-	void fillBackgroundColor(const Colorf& color);
+	void fillForegroundColor(const Color& color);
+	void fillBackgroundColor(const Color& color);
 	void fillTileIndex(unsigned int newIndex);
 
 	void setLine(int x1, int y1, int x2, int y2, const Tile& newTile);
 	void setLine(const Vector2i& p1, const Vector2i& p2, const Tile& newTile)
 		{ setLine(p1.x, p1.y, p2.x, p2.y, newTile);}
-	void setLineBackgroundColor(int x1, int y1, int x2, int y2, const Colorf& color);
-	void setLineBackgroundColor(const Vector2i& p1, const Vector2i& p2, const Colorf& color)
+	void setLineBackgroundColor(int x1, int y1, int x2, int y2, const Color& color);
+	void setLineBackgroundColor(const Vector2i& p1, const Vector2i& p2, const Color& color)
 		{ setLineBackgroundColor(p1.x, p1.y, p2.x, p2.y, color);}
-	void setLineForegroundColor(int x1, int y1, int x2, int y2, const Colorf& color);
-	void setLineForegroundColor(const Vector2i& p1, const Vector2i& p2, const Colorf& color)
+	void setLineForegroundColor(int x1, int y1, int x2, int y2, const Color& color);
+	void setLineForegroundColor(const Vector2i& p1, const Vector2i& p2, const Color& color)
 		{ setLineForegroundColor(p1.x, p1.y, p2.x, p2.y, color);}
 	void setLineTileIndex(int x1, int y1, int x2, int y2, unsigned int tileIndex);
 	void setLineTileIndex(const Vector2i& p1, const Vector2i& p2, unsigned int tileIndex)
@@ -80,11 +80,11 @@ public:
 	void setBox(int x, int y, int width, int height, const Tile& newTile);
 	void setBox(const Rectanglei& box, const Tile& newTile)
 		{ setBox(box.left(), box.bottom(), box.width(), box.height(), newTile);}
-	void setBoxBackgroundColor(int x, int y, int width, int height, const Colorf& color);
-	void setBoxBackgroundColor(const Rectanglei& box, const Colorf& color)
+	void setBoxBackgroundColor(int x, int y, int width, int height, const Color& color);
+	void setBoxBackgroundColor(const Rectanglei& box, const Color& color)
 		{ setBoxBackgroundColor(box.left(), box.bottom(), box.width(), box.height(), color);}
-	void setBoxForegroundColor(int x, int y, int width, int height, const Colorf& color);
-	void setBoxForegroundColor(const Rectanglei& box, const Colorf& color)
+	void setBoxForegroundColor(int x, int y, int width, int height, const Color& color);
+	void setBoxForegroundColor(const Rectanglei& box, const Color& color)
 		{ setBoxForegroundColor(box.left(), box.bottom(), box.width(), box.height(), color);}
 	void setBoxTileIndex(int x, int y, int width, int height, unsigned int index);
 	void setBoxTileIndex(const Rectanglei& box, unsigned int index)
@@ -130,7 +130,7 @@ inline void TileGrid::fill(const Tile& newTile)
 		});
 }
 
-inline void TileGrid::fillForegroundColor(const Colorf& color)
+inline void TileGrid::fillForegroundColor(const Color& color)
 {
 	applyToAll(
 		[color](Tile& tile)
@@ -139,7 +139,7 @@ inline void TileGrid::fillForegroundColor(const Colorf& color)
 		});
 }
 
-inline void TileGrid::fillBackgroundColor(const Colorf& color)
+inline void TileGrid::fillBackgroundColor(const Color& color)
 {
 	applyToAll(
 		[color](Tile& tile)
@@ -168,7 +168,7 @@ inline void TileGrid::setLine(int x1, int y1, int x2, int y2, const Tile& newTil
 }
 
 inline void TileGrid::setLineBackgroundColor(int x1, int y1, int x2, int y2,
-		const Colorf& color)
+		const Color& color)
 {
 	applyToLine(x1, y1, x2, y2,
 		[color](Tile& tile)
@@ -178,7 +178,7 @@ inline void TileGrid::setLineBackgroundColor(int x1, int y1, int x2, int y2,
 }
 
 inline void TileGrid::setLineForegroundColor(int x1, int y1, int x2, int y2,
-		const Colorf& color)
+		const Color& color)
 {
 	applyToLine(x1, y1, x2, y2,
 		[color](Tile& tile)
@@ -207,7 +207,7 @@ inline void TileGrid::setBox(int x, int y, int width, int height, const Tile& ne
 }
 
 inline void TileGrid::setBoxBackgroundColor(int x, int y, int width, int height,
-		const Colorf& color)
+		const Color& color)
 {
 	applyToBox(x, y, width, height,
 		[color](Tile& tile)
@@ -217,7 +217,7 @@ inline void TileGrid::setBoxBackgroundColor(int x, int y, int width, int height,
 }
 
 inline void TileGrid::setBoxForegroundColor(int x, int y, int width, int height,
-		const Colorf& color)
+		const Color& color)
 {
 	applyToBox(x, y, width, height,
 		[color](Tile& tile)
