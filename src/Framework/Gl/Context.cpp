@@ -52,7 +52,7 @@ void Context::bindShaderProgram(const ShaderProgram& object)
 	CHECK_GL_ERROR(glUseProgram);
 }
 
-void Context::setClearColor(const Color& color)
+void Context::setClearColor(const Colorf& color)
 {
 	glClearColor(color.red, color.green, color.blue, color.alpha);
 	CHECK_GL_ERROR(glClearColor);

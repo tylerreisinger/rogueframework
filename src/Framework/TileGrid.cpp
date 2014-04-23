@@ -4,8 +4,8 @@ namespace rf
 {
 
 TileGrid::TileGrid(int width, int height):
-	m_defaultState(Tile(Color::white(), Color::black(), 0)),
-	m_clearState(Tile(Color::white(), Color::black(), ' ')),
+	m_defaultState(Tile(Colorf::white(), Colorf::black(), 0)),
+	m_clearState(Tile(Colorf::white(), Colorf::black(), ' ')),
 	m_width(width), m_height(height), m_tiles(width * height)
 {
 }

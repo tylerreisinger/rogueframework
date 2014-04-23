@@ -12,7 +12,7 @@
 
 namespace rf
 {
-class Color;
+class Colorf;
 
 namespace gl
 {
@@ -51,7 +51,7 @@ public:
 	void bindShaderProgram(const ShaderProgram& object);
 
 	void clear(const Flags<ClearFlags>& flags);
-	void setClearColor(const Color& color);
+	void setClearColor(const Colorf& color);
 
 	void setActiveTextureUnit(int index);
 

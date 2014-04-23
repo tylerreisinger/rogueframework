@@ -10,7 +10,7 @@ class Tile
 {
 public:
 	Tile() {};
-	Tile(const Color& foregroundColor, const Color& backgroundColor, unsigned int tileIndex);
+	Tile(const Colorf& foregroundColor, const Colorf& backgroundColor, unsigned int tileIndex);
 	~Tile() = default;
 
 	Tile(const Tile& other);
@@ -18,17 +18,17 @@ public:
 	Tile& operator =(const Tile& other);
 	Tile& operator =(Tile&& other) noexcept;
 
-	const Color& foregroundColor() const {return m_foregroundColor;}
-	const Color& backgroundColor() const {return m_backgroundColor;}
+	const Colorf& foregroundColor() const {return m_foregroundColor;}
+	const Colorf& backgroundColor() const {return m_backgroundColor;}
 	unsigned int tileIndex() const {return m_tileIndex;}
 
-	Tile& setForegroundColor(const Color& color) {m_foregroundColor = color; return *this;}
-	Tile& setBackgroundColor(const Color& color) {m_backgroundColor = color; return *this;}
+	Tile& setForegroundColor(const Colorf& color) {m_foregroundColor = color; return *this;}
+	Tile& setBackgroundColor(const Colorf& color) {m_backgroundColor = color; return *this;}
 	Tile& setTileIndex(unsigned int index) {m_tileIndex = index; return *this;}
 
 protected:
-	Color m_foregroundColor = Color::white();
-	Color m_backgroundColor = Color::black();
+	Colorf m_foregroundColor = Colorf::white();
+	Colorf m_backgroundColor = Colorf::black();
 	unsigned int m_tileIndex = ' ';
 };
 
