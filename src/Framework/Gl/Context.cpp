@@ -1,6 +1,6 @@
 #include "Context.h"
 
-#include "Framework/Color.h"
+#include "Framework/Colorf.h"
 
 #include "BufferObject.h"
 #include "TextureArray2d.h"

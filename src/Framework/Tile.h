@@ -1,7 +1,7 @@
 #ifndef TILE_H_
 #define TILE_H_
 
-#include "Framework/Color.h"
+#include "Framework/Colorf.h"
 
 namespace rf
 {
