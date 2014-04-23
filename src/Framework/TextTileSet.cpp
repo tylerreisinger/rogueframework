@@ -16,6 +16,15 @@ TextTileSet::TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* 
 {
 	m_freeSlots.reserve(maxTiles);
 
+	auto gCharacter = std::static_pointer_cast<const BitmapGlyph>(m_fontFace->getGlyph('g'));
+	int belowBaseline = gCharacter->top() - gCharacter->rows();
+	if(belowBaseline > 0)
+	{
+		belowBaseline = 0;
+	}
+	m_tileHeight = -belowBaseline + m_fontFace->lineHeight();
+	m_vertShift = -belowBaseline;
+
 	auto size = computeTextureSize();
 	m_textureWidth = size.x;
 	m_textureHeight = size.y;
@@ -24,9 +33,13 @@ TextTileSet::TextTileSet(std::shared_ptr<const FontFace> fontFace, gl::Context* 
 	m_textureLayers = std::ceil(static_cast<double>(maxTiles) / tilesPerTex);
 	m_tilesTexture.reset(new gl::TextureArray2d(m_textureWidth, m_textureHeight, m_textureLayers,
 			1, gl::Texture::InternalPixelFormat::RGBA8, context));
+	m_tilesTexture->setFilterModes(gl::Texture::FilterMode::Linear, gl::Texture::FilterMode::Linear);
+
 
 	m_cellWidth = tileWidth() / static_cast<double>(m_textureWidth);
 	m_cellHeight = tileHeight() / static_cast<double>(m_textureHeight);
+
+
 
 	addInitialSlots();
 }
@@ -75,11 +88,14 @@ std::unique_ptr<uint32_t[]> TextTileSet::copyGlyphBitmap(std::shared_ptr<const B
 	auto data = std::unique_ptr<uint32_t []>(new uint32_t[bitmapSize]);
 	std::fill(data.get(), &data[bitmapSize], 0);
 
+	int maxUp = m_tileHeight - m_fontFace->lineHeight();
+
 	int belowBaseline = glyph->top() - glyph->rows();
 	if(belowBaseline > 0)
 	{
 		belowBaseline = 0;
 	}
+
 
 	const unsigned char* sourceBitmap = glyph->buffer();
 	for(int x = 0; x < glyph->width(); ++x)
@@ -88,13 +104,12 @@ std::unique_ptr<uint32_t[]> TextTileSet::copyGlyphBitmap(std::shared_ptr<const B
 		{
 			int xPos = x + glyph->left();
 			//Adjust upwards if the glyph extends below the baseline
-			int yPos = y + tileHeight() - glyph->top() + belowBaseline;
+			int yPos = y + tileHeight() - glyph->top() /*+ belowBaseline*/ - m_vertShift/* - 3*/;
 			int index = xPos + yPos * tileWidth();
 			//Set color to white and alpha to the color in the glyph bitmap.
-			if(index < bitmapSize)
+			if(index < bitmapSize && index >= 0)
 			{
-				data[index] = (sourceBitmap[x + y * glyph->pitch()] << 24) | (sourceBitmap[x + y * glyph->pitch()] << 16)
-						| (sourceBitmap[x + y * glyph->pitch()] << 8) | (sourceBitmap[x + y * glyph->pitch()] << 0);
+				data[index] = 0x00FFFFFF | (sourceBitmap[x + y * glyph->pitch()] << 24);
 			}
 		}
 	}

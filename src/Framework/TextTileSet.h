@@ -33,7 +33,7 @@ public:
 	TextTileSet& operator =(TextTileSet&& other) noexcept;
 
 	virtual int tileWidth() const override {return m_fontFace->maxAdvanceWidth();}
-	virtual int tileHeight() const override {return m_fontFace->lineHeight();}
+	virtual int tileHeight() const override {return m_tileHeight;}
 
 	virtual TileLocation getTileLocation(int index) override;
 
@@ -66,6 +66,9 @@ protected:
 	int m_textureWidth;
 	int m_textureHeight;
 	int m_textureLayers;
+
+	int m_tileHeight;
+	int m_vertShift;
 };
 
 }

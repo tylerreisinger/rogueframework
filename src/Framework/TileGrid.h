@@ -283,8 +283,8 @@ template<typename FnType>
 inline void TileGrid::applyToBox(int x, int y, int width, int height,
 		const FnType& fn)
 {
-	assert(x > 0);
-	assert(y > 0);
+	assert(x >= 0);
+	assert(y >= 0);
 
 	for(int yPos = 0; yPos < height; ++yPos)
 	{
@@ -294,7 +294,7 @@ inline void TileGrid::applyToBox(int x, int y, int width, int height,
 		}
 		for(int xPos = 0; xPos < width; ++xPos)
 		{
-			if(x + xPos >= m_height)
+			if(x + xPos >= m_width)
 			{
 				break;
 			}

@@ -98,9 +98,9 @@ void TileGridRenderer::fillDynamicAttributeBuffer()
 	const int gridHeight = m_grid->height();
 
 	auto dynBufferMapping = m_colorTexCoordBuffer.map<DynVertexAttribs>(gl::BufferObject::MappingOptions::Write);
-	for(int y = 0; y < gridWidth; ++y)
+	for(int y = 0; y < gridHeight; ++y)
 	{
-		for(int x = 0; x < gridHeight; ++x)
+		for(int x = 0; x < gridWidth; ++x)
 		{
 			int index = x + y * gridWidth;
 			int vertexIndex = index * 4;
@@ -184,7 +184,7 @@ std::shared_ptr<gl::ShaderProgram> TileGridRenderer::createDefaultShaders(gl::Co
 	        vec4 texColor = texture(texSampler, texCoord);
 	        vec4 fgColor = texColor * foregroundColor;
 	        colorOut = vec4(fgColor.rgb * fgColor.a + backgroundColor.rgb 
-	                   * backgroundColor.a * (1.0 - fgColor.a), 1);
+	                   * backgroundColor.a * (1.0 - fgColor.a), fgColor.a + backgroundColor.a * (1.0 - fgColor.a));
 		}
 		)";
 
