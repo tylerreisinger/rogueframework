@@ -1,12 +1,13 @@
-#ifndef COLOR_H_
-#define COLOR_H_
+#ifndef COLORF_H_
+#define COLORF_H_
 
 #include <cstdint>
 #include <cmath>
 
+
 namespace rf
 {
-
+class Color;
 /**
  * @brief Represents a RGB color with floating point components between 0 and 1.
  */
@@ -18,6 +19,7 @@ public:
 	explicit constexpr Colorf(unsigned int color);
 	constexpr Colorf(float red, float green, float blue);
 	constexpr Colorf(float red, float green, float blue, float alpha);
+	Colorf(const Color& color);
 	Colorf(const Colorf& color) = default;
 	Colorf(Colorf&& color) = default;
 	~Colorf() = default;
@@ -33,11 +35,11 @@ public:
 	inline uint8_t blueByte() const {return blue * 255 + 0.5;}
 	inline uint8_t alphaByte() const {return alpha * 255 + 0.5;}
 
-	uint32_t toRGB() const;
-	uint32_t toRGBA() const;
-	uint32_t toABGR() const;
+	uint32_t toRgb() const;
+	uint32_t toRgba() const;
+	uint32_t toAbgr() const;
 
-	uint32_t toRGBAEndianAware() const {return toABGR();}
+	uint32_t toRGBAEndianAware() const {return toAbgr();}
 
 	static Colorf alphaBlend(const Colorf& color1, const Colorf& color2);
 	static Colorf fromByteChannels(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
@@ -211,6 +213,8 @@ inline constexpr Colorf::Colorf(float redValue, float greenValue, float blueValu
 {
 
 }
+
+
 
 }
 
