@@ -36,37 +36,6 @@ TileGrid& TileGrid::operator =(TileGrid&& other) noexcept
 	return *this;
 }
 
-void TileGrid::writeString(int startX, int startY, const char* string, TextWrappingMode wrapMode)
-{
-	int x = startX;
-	int y = startY;
-	const char* stringPtr = string;
-	while(true)
-	{
-		char ch = *stringPtr;
-		if(ch == '\0')
-		{
-			break;
-		}
-		m_tiles[x + m_width * y] = m_defaultState;
-		m_tiles[x + m_width * y].setTileIndex(ch);
-		++stringPtr;
-		++x;
-		if(x >= m_width)
-		{
-			if(wrapMode == TextWrappingMode::Wrap)
-			{
-				y++;
-				x = 0;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-}
-
 
 
 }

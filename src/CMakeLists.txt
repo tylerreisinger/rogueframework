@@ -77,6 +77,8 @@ SET(FRAMEWORK_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/Tile.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGrid.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridView.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridView.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridRenderer.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileGridRenderer.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Framework/TileSet.h
